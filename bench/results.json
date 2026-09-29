@@ -1,0 +1,4295 @@
+{
+  "model": "jev-1.13.0",
+  "raw": {
+    "calls": 210,
+    "errors": 0,
+    "accuracy": 0.7428571428571429,
+    "unstableScenarios": 6,
+    "scenarios": 70,
+    "avgInputTokens": 1235.8428571428572,
+    "p50LatencyMs": 335.60533399999986,
+    "p95LatencyMs": 422.1159580000003,
+    "calibration": [
+      {
+        "range": "0–0.5",
+        "n": 38,
+        "avgConfidence": 0.41184210526315806,
+        "accuracy": 0.2894736842105263
+      },
+      {
+        "range": "0.5–0.7",
+        "n": 32,
+        "avgConfidence": 0.5825,
+        "accuracy": 0.5625
+      },
+      {
+        "range": "0.7–0.9",
+        "n": 70,
+        "avgConfidence": 0.8174285714285712,
+        "accuracy": 0.8142857142857143
+      },
+      {
+        "range": "0.9–1",
+        "n": 70,
+        "avgConfidence": 0.9578571428571426,
+        "accuracy": 1
+      }
+    ],
+    "perAction": {
+      "retreat": 0.5,
+      "take_cover": 1,
+      "heal": 0.6,
+      "reload": 0.9,
+      "attack": 0.8666666666666667,
+      "investigate": 0.9,
+      "patrol": 0.43333333333333335
+    }
+  },
+  "projected": {
+    "calls": 210,
+    "errors": 0,
+    "accuracy": 1,
+    "unstableScenarios": 0,
+    "scenarios": 70,
+    "avgInputTokens": 699.0428571428571,
+    "p50LatencyMs": 334.54383300000336,
+    "p95LatencyMs": 389.8734169999989,
+    "calibration": [
+      {
+        "range": "0–0.5",
+        "n": 0,
+        "avgConfidence": 0,
+        "accuracy": 0
+      },
+      {
+        "range": "0.5–0.7",
+        "n": 3,
+        "avgConfidence": 0.66,
+        "accuracy": 1
+      },
+      {
+        "range": "0.7–0.9",
+        "n": 29,
+        "avgConfidence": 0.8127586206896551,
+        "accuracy": 1
+      },
+      {
+        "range": "0.9–1",
+        "n": 178,
+        "avgConfidence": 0.9892134831460672,
+        "accuracy": 1
+      }
+    ],
+    "perAction": {
+      "retreat": 1,
+      "take_cover": 1,
+      "heal": 1,
+      "reload": 1,
+      "attack": 1,
+      "investigate": 1,
+      "patrol": 1
+    }
+  },
+  "results": [
+    {
+      "scenario": "s00000",
+      "variant": "projected",
+      "run": 1,
+      "expected": "retreat",
+      "got": "retreat",
+      "confidence": 1,
+      "inputTokens": 760,
+      "latencyMs": 347.92508399999997
+    },
+    {
+      "scenario": "s00000",
+      "variant": "raw",
+      "run": 0,
+      "expected": "retreat",
+      "got": "heal",
+      "confidence": 0.49,
+      "inputTokens": 1809,
+      "latencyMs": 360.343666
+    },
+    {
+      "scenario": "s00000",
+      "variant": "raw",
+      "run": 1,
+      "expected": "retreat",
+      "got": "heal",
+      "confidence": 0.42,
+      "inputTokens": 1809,
+      "latencyMs": 353.74354200000005
+    },
+    {
+      "scenario": "s00000",
+      "variant": "projected",
+      "run": 0,
+      "expected": "retreat",
+      "got": "retreat",
+      "confidence": 1,
+      "inputTokens": 760,
+      "latencyMs": 377.80612499999995
+    },
+    {
+      "scenario": "s00000",
+      "variant": "raw",
+      "run": 2,
+      "expected": "retreat",
+      "got": "heal",
+      "confidence": 0.41,
+      "inputTokens": 1809,
+      "latencyMs": 410.277208
+    },
+    {
+      "scenario": "s00000",
+      "variant": "projected",
+      "run": 2,
+      "expected": "retreat",
+      "got": "retreat",
+      "confidence": 1,
+      "inputTokens": 760,
+      "latencyMs": 310.42941600000006
+    },
+    {
+      "scenario": "s00013",
+      "variant": "raw",
+      "run": 0,
+      "expected": "retreat",
+      "got": "retreat",
+      "confidence": 0.81,
+      "inputTokens": 1528,
+      "latencyMs": 314.63354200000003
+    },
+    {
+      "scenario": "s00013",
+      "variant": "raw",
+      "run": 1,
+      "expected": "retreat",
+      "got": "retreat",
+      "confidence": 0.85,
+      "inputTokens": 1528,
+      "latencyMs": 371.180625
+    },
+    {
+      "scenario": "s00013",
+      "variant": "raw",
+      "run": 2,
+      "expected": "retreat",
+      "got": "retreat",
+      "confidence": 0.82,
+      "inputTokens": 1528,
+      "latencyMs": 348.07845799999996
+    },
+    {
+      "scenario": "s00013",
+      "variant": "projected",
+      "run": 0,
+      "expected": "retreat",
+      "got": "retreat",
+      "confidence": 1,
+      "inputTokens": 742,
+      "latencyMs": 344.150375
+    },
+    {
+      "scenario": "s00013",
+      "variant": "projected",
+      "run": 1,
+      "expected": "retreat",
+      "got": "retreat",
+      "confidence": 1,
+      "inputTokens": 742,
+      "latencyMs": 323.383833
+    },
+    {
+      "scenario": "s00013",
+      "variant": "projected",
+      "run": 2,
+      "expected": "retreat",
+      "got": "retreat",
+      "confidence": 1,
+      "inputTokens": 742,
+      "latencyMs": 333.179625
+    },
+    {
+      "scenario": "s00023",
+      "variant": "raw",
+      "run": 0,
+      "expected": "retreat",
+      "got": "take_cover",
+      "confidence": 0.32,
+      "inputTokens": 1541,
+      "latencyMs": 321.00358400000005
+    },
+    {
+      "scenario": "s00023",
+      "variant": "raw",
+      "run": 1,
+      "expected": "retreat",
+      "got": "take_cover",
+      "confidence": 0.43,
+      "inputTokens": 1541,
+      "latencyMs": 348.1685839999999
+    },
+    {
+      "scenario": "s00023",
+      "variant": "raw",
+      "run": 2,
+      "expected": "retreat",
+      "got": "heal",
+      "confidence": 0.39,
+      "inputTokens": 1541,
+      "latencyMs": 362.41245800000013
+    },
+    {
+      "scenario": "s00023",
+      "variant": "projected",
+      "run": 0,
+      "expected": "retreat",
+      "got": "retreat",
+      "confidence": 1,
+      "inputTokens": 757,
+      "latencyMs": 316.85462500000017
+    },
+    {
+      "scenario": "s00023",
+      "variant": "projected",
+      "run": 1,
+      "expected": "retreat",
+      "got": "retreat",
+      "confidence": 1,
+      "inputTokens": 757,
+      "latencyMs": 319.035666
+    },
+    {
+      "scenario": "s00023",
+      "variant": "projected",
+      "run": 2,
+      "expected": "retreat",
+      "got": "retreat",
+      "confidence": 1,
+      "inputTokens": 757,
+      "latencyMs": 335.138833
+    },
+    {
+      "scenario": "s00025",
+      "variant": "raw",
+      "run": 0,
+      "expected": "retreat",
+      "got": "retreat",
+      "confidence": 0.49,
+      "inputTokens": 1407,
+      "latencyMs": 338.07725000000005
+    },
+    {
+      "scenario": "s00025",
+      "variant": "raw",
+      "run": 1,
+      "expected": "retreat",
+      "got": "retreat",
+      "confidence": 0.68,
+      "inputTokens": 1407,
+      "latencyMs": 335.60533399999986
+    },
+    {
+      "scenario": "s00025",
+      "variant": "raw",
+      "run": 2,
+      "expected": "retreat",
+      "got": "retreat",
+      "confidence": 0.52,
+      "inputTokens": 1407,
+      "latencyMs": 320.7612080000001
+    },
+    {
+      "scenario": "s00025",
+      "variant": "projected",
+      "run": 0,
+      "expected": "retreat",
+      "got": "retreat",
+      "confidence": 1,
+      "inputTokens": 737,
+      "latencyMs": 338.716958
+    },
+    {
+      "scenario": "s00025",
+      "variant": "projected",
+      "run": 1,
+      "expected": "retreat",
+      "got": "retreat",
+      "confidence": 1,
+      "inputTokens": 737,
+      "latencyMs": 337.2265
+    },
+    {
+      "scenario": "s00025",
+      "variant": "projected",
+      "run": 2,
+      "expected": "retreat",
+      "got": "retreat",
+      "confidence": 1,
+      "inputTokens": 737,
+      "latencyMs": 314.13208299999997
+    },
+    {
+      "scenario": "s00029",
+      "variant": "raw",
+      "run": 0,
+      "expected": "retreat",
+      "got": "attack",
+      "confidence": 0.41,
+      "inputTokens": 1280,
+      "latencyMs": 336.242125
+    },
+    {
+      "scenario": "s00029",
+      "variant": "raw",
+      "run": 1,
+      "expected": "retreat",
+      "got": "attack",
+      "confidence": 0.43,
+      "inputTokens": 1280,
+      "latencyMs": 334.3035829999999
+    },
+    {
+      "scenario": "s00029",
+      "variant": "raw",
+      "run": 2,
+      "expected": "retreat",
+      "got": "attack",
+      "confidence": 0.47,
+      "inputTokens": 1280,
+      "latencyMs": 359.5804170000001
+    },
+    {
+      "scenario": "s00029",
+      "variant": "projected",
+      "run": 0,
+      "expected": "retreat",
+      "got": "retreat",
+      "confidence": 1,
+      "inputTokens": 718,
+      "latencyMs": 345.4408340000002
+    },
+    {
+      "scenario": "s00029",
+      "variant": "projected",
+      "run": 1,
+      "expected": "retreat",
+      "got": "retreat",
+      "confidence": 1,
+      "inputTokens": 718,
+      "latencyMs": 364.4274170000001
+    },
+    {
+      "scenario": "s00029",
+      "variant": "projected",
+      "run": 2,
+      "expected": "retreat",
+      "got": "retreat",
+      "confidence": 1,
+      "inputTokens": 718,
+      "latencyMs": 308.9150840000002
+    },
+    {
+      "scenario": "s00031",
+      "variant": "raw",
+      "run": 0,
+      "expected": "retreat",
+      "got": "retreat",
+      "confidence": 0.84,
+      "inputTokens": 1669,
+      "latencyMs": 347.1992499999999
+    },
+    {
+      "scenario": "s00031",
+      "variant": "raw",
+      "run": 1,
+      "expected": "retreat",
+      "got": "retreat",
+      "confidence": 0.78,
+      "inputTokens": 1669,
+      "latencyMs": 318.36466599999994
+    },
+    {
+      "scenario": "s00031",
+      "variant": "raw",
+      "run": 2,
+      "expected": "retreat",
+      "got": "retreat",
+      "confidence": 0.79,
+      "inputTokens": 1669,
+      "latencyMs": 320.462125
+    },
+    {
+      "scenario": "s00031",
+      "variant": "projected",
+      "run": 1,
+      "expected": "retreat",
+      "got": "retreat",
+      "confidence": 1,
+      "inputTokens": 756,
+      "latencyMs": 312.47325
+    },
+    {
+      "scenario": "s00031",
+      "variant": "projected",
+      "run": 0,
+      "expected": "retreat",
+      "got": "retreat",
+      "confidence": 1,
+      "inputTokens": 756,
+      "latencyMs": 372.8063750000001
+    },
+    {
+      "scenario": "s00031",
+      "variant": "projected",
+      "run": 2,
+      "expected": "retreat",
+      "got": "retreat",
+      "confidence": 1,
+      "inputTokens": 756,
+      "latencyMs": 336.59983299999976
+    },
+    {
+      "scenario": "s00042",
+      "variant": "raw",
+      "run": 0,
+      "expected": "retreat",
+      "got": "heal",
+      "confidence": 0.37,
+      "inputTokens": 1952,
+      "latencyMs": 345.1644590000001
+    },
+    {
+      "scenario": "s00042",
+      "variant": "raw",
+      "run": 1,
+      "expected": "retreat",
+      "got": "heal",
+      "confidence": 0.31,
+      "inputTokens": 1952,
+      "latencyMs": 311.1444999999999
+    },
+    {
+      "scenario": "s00042",
+      "variant": "raw",
+      "run": 2,
+      "expected": "retreat",
+      "got": "heal",
+      "confidence": 0.35,
+      "inputTokens": 1952,
+      "latencyMs": 332.869334
+    },
+    {
+      "scenario": "s00042",
+      "variant": "projected",
+      "run": 0,
+      "expected": "retreat",
+      "got": "retreat",
+      "confidence": 1,
+      "inputTokens": 757,
+      "latencyMs": 349.68124999999964
+    },
+    {
+      "scenario": "s00042",
+      "variant": "projected",
+      "run": 1,
+      "expected": "retreat",
+      "got": "retreat",
+      "confidence": 1,
+      "inputTokens": 757,
+      "latencyMs": 360.6132080000002
+    },
+    {
+      "scenario": "s00042",
+      "variant": "projected",
+      "run": 2,
+      "expected": "retreat",
+      "got": "retreat",
+      "confidence": 1,
+      "inputTokens": 757,
+      "latencyMs": 325.4656249999998
+    },
+    {
+      "scenario": "s00043",
+      "variant": "raw",
+      "run": 0,
+      "expected": "retreat",
+      "got": "retreat",
+      "confidence": 0.86,
+      "inputTokens": 1801,
+      "latencyMs": 328.46166700000003
+    },
+    {
+      "scenario": "s00043",
+      "variant": "raw",
+      "run": 1,
+      "expected": "retreat",
+      "got": "retreat",
+      "confidence": 0.86,
+      "inputTokens": 1801,
+      "latencyMs": 358.616708
+    },
+    {
+      "scenario": "s00043",
+      "variant": "raw",
+      "run": 2,
+      "expected": "retreat",
+      "got": "retreat",
+      "confidence": 0.85,
+      "inputTokens": 1801,
+      "latencyMs": 314.87408400000004
+    },
+    {
+      "scenario": "s00043",
+      "variant": "projected",
+      "run": 2,
+      "expected": "retreat",
+      "got": "retreat",
+      "confidence": 1,
+      "inputTokens": 744,
+      "latencyMs": 317.3715830000001
+    },
+    {
+      "scenario": "s00043",
+      "variant": "projected",
+      "run": 0,
+      "expected": "retreat",
+      "got": "retreat",
+      "confidence": 1,
+      "inputTokens": 744,
+      "latencyMs": 345.99908400000004
+    },
+    {
+      "scenario": "s00043",
+      "variant": "projected",
+      "run": 1,
+      "expected": "retreat",
+      "got": "retreat",
+      "confidence": 1,
+      "inputTokens": 744,
+      "latencyMs": 356.0828330000004
+    },
+    {
+      "scenario": "s00048",
+      "variant": "raw",
+      "run": 0,
+      "expected": "retreat",
+      "got": "retreat",
+      "confidence": 0.83,
+      "inputTokens": 1277,
+      "latencyMs": 317.1997500000002
+    },
+    {
+      "scenario": "s00048",
+      "variant": "raw",
+      "run": 1,
+      "expected": "retreat",
+      "got": "retreat",
+      "confidence": 0.86,
+      "inputTokens": 1277,
+      "latencyMs": 327.22024999999985
+    },
+    {
+      "scenario": "s00048",
+      "variant": "projected",
+      "run": 0,
+      "expected": "retreat",
+      "got": "retreat",
+      "confidence": 1,
+      "inputTokens": 719,
+      "latencyMs": 345.66049999999996
+    },
+    {
+      "scenario": "s00048",
+      "variant": "projected",
+      "run": 1,
+      "expected": "retreat",
+      "got": "retreat",
+      "confidence": 1,
+      "inputTokens": 719,
+      "latencyMs": 331.09845799999994
+    },
+    {
+      "scenario": "s00048",
+      "variant": "raw",
+      "run": 2,
+      "expected": "retreat",
+      "got": "retreat",
+      "confidence": 0.88,
+      "inputTokens": 1277,
+      "latencyMs": 388.08187499999985
+    },
+    {
+      "scenario": "s00048",
+      "variant": "projected",
+      "run": 2,
+      "expected": "retreat",
+      "got": "retreat",
+      "confidence": 1,
+      "inputTokens": 719,
+      "latencyMs": 342.61812499999996
+    },
+    {
+      "scenario": "s00050",
+      "variant": "raw",
+      "run": 0,
+      "expected": "retreat",
+      "got": "heal",
+      "confidence": 0.3,
+      "inputTokens": 1678,
+      "latencyMs": 348.65708300000006
+    },
+    {
+      "scenario": "s00050",
+      "variant": "projected",
+      "run": 0,
+      "expected": "retreat",
+      "got": "retreat",
+      "confidence": 1,
+      "inputTokens": 756,
+      "latencyMs": 299.745042
+    },
+    {
+      "scenario": "s00050",
+      "variant": "raw",
+      "run": 2,
+      "expected": "retreat",
+      "got": "heal",
+      "confidence": 0.37,
+      "inputTokens": 1678,
+      "latencyMs": 354.00525000000016
+    },
+    {
+      "scenario": "s00050",
+      "variant": "projected",
+      "run": 1,
+      "expected": "retreat",
+      "got": "retreat",
+      "confidence": 1,
+      "inputTokens": 756,
+      "latencyMs": 352.47233400000005
+    },
+    {
+      "scenario": "s00050",
+      "variant": "projected",
+      "run": 2,
+      "expected": "retreat",
+      "got": "retreat",
+      "confidence": 1,
+      "inputTokens": 756,
+      "latencyMs": 311.19537500000024
+    },
+    {
+      "scenario": "s00050",
+      "variant": "raw",
+      "run": 1,
+      "expected": "retreat",
+      "got": "heal",
+      "confidence": 0.44,
+      "inputTokens": 1678,
+      "latencyMs": 494.97366599999987
+    },
+    {
+      "scenario": "s00009",
+      "variant": "raw",
+      "run": 1,
+      "expected": "take_cover",
+      "got": "take_cover",
+      "confidence": 0.98,
+      "inputTokens": 1806,
+      "latencyMs": 351.6201669999996
+    },
+    {
+      "scenario": "s00009",
+      "variant": "raw",
+      "run": 0,
+      "expected": "take_cover",
+      "got": "take_cover",
+      "confidence": 0.97,
+      "inputTokens": 1806,
+      "latencyMs": 390.36879100000033
+    },
+    {
+      "scenario": "s00009",
+      "variant": "projected",
+      "run": 0,
+      "expected": "take_cover",
+      "got": "take_cover",
+      "confidence": 1,
+      "inputTokens": 758,
+      "latencyMs": 317.9085420000001
+    },
+    {
+      "scenario": "s00009",
+      "variant": "raw",
+      "run": 2,
+      "expected": "take_cover",
+      "got": "take_cover",
+      "confidence": 0.98,
+      "inputTokens": 1806,
+      "latencyMs": 340.48816700000043
+    },
+    {
+      "scenario": "s00009",
+      "variant": "projected",
+      "run": 1,
+      "expected": "take_cover",
+      "got": "take_cover",
+      "confidence": 1,
+      "inputTokens": 758,
+      "latencyMs": 455.1765409999998
+    },
+    {
+      "scenario": "s00010",
+      "variant": "raw",
+      "run": 0,
+      "expected": "take_cover",
+      "got": "take_cover",
+      "confidence": 0.99,
+      "inputTokens": 1675,
+      "latencyMs": 323.6055409999999
+    },
+    {
+      "scenario": "s00009",
+      "variant": "projected",
+      "run": 2,
+      "expected": "take_cover",
+      "got": "take_cover",
+      "confidence": 1,
+      "inputTokens": 758,
+      "latencyMs": 356.8253329999998
+    },
+    {
+      "scenario": "s00010",
+      "variant": "raw",
+      "run": 2,
+      "expected": "take_cover",
+      "got": "take_cover",
+      "confidence": 0.99,
+      "inputTokens": 1675,
+      "latencyMs": 315.83129199999985
+    },
+    {
+      "scenario": "s00010",
+      "variant": "raw",
+      "run": 1,
+      "expected": "take_cover",
+      "got": "take_cover",
+      "confidence": 0.99,
+      "inputTokens": 1675,
+      "latencyMs": 358.4458340000001
+    },
+    {
+      "scenario": "s00010",
+      "variant": "projected",
+      "run": 0,
+      "expected": "take_cover",
+      "got": "take_cover",
+      "confidence": 1,
+      "inputTokens": 754,
+      "latencyMs": 333.7347089999994
+    },
+    {
+      "scenario": "s00010",
+      "variant": "projected",
+      "run": 1,
+      "expected": "take_cover",
+      "got": "take_cover",
+      "confidence": 1,
+      "inputTokens": 754,
+      "latencyMs": 307.8061659999994
+    },
+    {
+      "scenario": "s00010",
+      "variant": "projected",
+      "run": 2,
+      "expected": "take_cover",
+      "got": "take_cover",
+      "confidence": 1,
+      "inputTokens": 754,
+      "latencyMs": 365.9847919999993
+    },
+    {
+      "scenario": "s00027",
+      "variant": "raw",
+      "run": 0,
+      "expected": "take_cover",
+      "got": "take_cover",
+      "confidence": 0.96,
+      "inputTokens": 1015,
+      "latencyMs": 350.3321249999999
+    },
+    {
+      "scenario": "s00027",
+      "variant": "raw",
+      "run": 1,
+      "expected": "take_cover",
+      "got": "take_cover",
+      "confidence": 0.94,
+      "inputTokens": 1015,
+      "latencyMs": 336.6767919999993
+    },
+    {
+      "scenario": "s00027",
+      "variant": "raw",
+      "run": 2,
+      "expected": "take_cover",
+      "got": "take_cover",
+      "confidence": 0.98,
+      "inputTokens": 1015,
+      "latencyMs": 297.6056660000004
+    },
+    {
+      "scenario": "s00027",
+      "variant": "projected",
+      "run": 0,
+      "expected": "take_cover",
+      "got": "take_cover",
+      "confidence": 1,
+      "inputTokens": 679,
+      "latencyMs": 357.569708
+    },
+    {
+      "scenario": "s00040",
+      "variant": "raw",
+      "run": 0,
+      "expected": "take_cover",
+      "got": "take_cover",
+      "confidence": 0.99,
+      "inputTokens": 1412,
+      "latencyMs": 316.61433299999953
+    },
+    {
+      "scenario": "s00027",
+      "variant": "projected",
+      "run": 1,
+      "expected": "take_cover",
+      "got": "take_cover",
+      "confidence": 1,
+      "inputTokens": 679,
+      "latencyMs": 326.3896670000004
+    },
+    {
+      "scenario": "s00027",
+      "variant": "projected",
+      "run": 2,
+      "expected": "take_cover",
+      "got": "take_cover",
+      "confidence": 1,
+      "inputTokens": 679,
+      "latencyMs": 326.0804590000007
+    },
+    {
+      "scenario": "s00040",
+      "variant": "raw",
+      "run": 1,
+      "expected": "take_cover",
+      "got": "take_cover",
+      "confidence": 0.99,
+      "inputTokens": 1412,
+      "latencyMs": 359.0719159999999
+    },
+    {
+      "scenario": "s00040",
+      "variant": "raw",
+      "run": 2,
+      "expected": "take_cover",
+      "got": "take_cover",
+      "confidence": 0.99,
+      "inputTokens": 1412,
+      "latencyMs": 332.54475
+    },
+    {
+      "scenario": "s00040",
+      "variant": "projected",
+      "run": 0,
+      "expected": "take_cover",
+      "got": "take_cover",
+      "confidence": 1,
+      "inputTokens": 736,
+      "latencyMs": 317.1884170000003
+    },
+    {
+      "scenario": "s00040",
+      "variant": "projected",
+      "run": 1,
+      "expected": "take_cover",
+      "got": "take_cover",
+      "confidence": 1,
+      "inputTokens": 736,
+      "latencyMs": 329.0866670000005
+    },
+    {
+      "scenario": "s00040",
+      "variant": "projected",
+      "run": 2,
+      "expected": "take_cover",
+      "got": "take_cover",
+      "confidence": 1,
+      "inputTokens": 736,
+      "latencyMs": 341.734958
+    },
+    {
+      "scenario": "s00058",
+      "variant": "raw",
+      "run": 0,
+      "expected": "take_cover",
+      "got": "take_cover",
+      "confidence": 0.98,
+      "inputTokens": 1802,
+      "latencyMs": 326.1854999999996
+    },
+    {
+      "scenario": "s00058",
+      "variant": "raw",
+      "run": 2,
+      "expected": "take_cover",
+      "got": "take_cover",
+      "confidence": 0.99,
+      "inputTokens": 1802,
+      "latencyMs": 300.8272079999997
+    },
+    {
+      "scenario": "s00058",
+      "variant": "raw",
+      "run": 1,
+      "expected": "take_cover",
+      "got": "take_cover",
+      "confidence": 0.98,
+      "inputTokens": 1802,
+      "latencyMs": 360.84329199999956
+    },
+    {
+      "scenario": "s00058",
+      "variant": "projected",
+      "run": 0,
+      "expected": "take_cover",
+      "got": "take_cover",
+      "confidence": 1,
+      "inputTokens": 756,
+      "latencyMs": 353.3249999999998
+    },
+    {
+      "scenario": "s00058",
+      "variant": "projected",
+      "run": 1,
+      "expected": "take_cover",
+      "got": "take_cover",
+      "confidence": 1,
+      "inputTokens": 756,
+      "latencyMs": 376.91108299999996
+    },
+    {
+      "scenario": "s00058",
+      "variant": "projected",
+      "run": 2,
+      "expected": "take_cover",
+      "got": "take_cover",
+      "confidence": 1,
+      "inputTokens": 756,
+      "latencyMs": 323.12991599999987
+    },
+    {
+      "scenario": "s00060",
+      "variant": "raw",
+      "run": 2,
+      "expected": "take_cover",
+      "got": "take_cover",
+      "confidence": 0.99,
+      "inputTokens": 1941,
+      "latencyMs": 305.7434580000008
+    },
+    {
+      "scenario": "s00060",
+      "variant": "raw",
+      "run": 0,
+      "expected": "take_cover",
+      "got": "take_cover",
+      "confidence": 0.99,
+      "inputTokens": 1941,
+      "latencyMs": 372.38325000000077
+    },
+    {
+      "scenario": "s00060",
+      "variant": "raw",
+      "run": 1,
+      "expected": "take_cover",
+      "got": "take_cover",
+      "confidence": 0.99,
+      "inputTokens": 1941,
+      "latencyMs": 359.7522909999998
+    },
+    {
+      "scenario": "s00060",
+      "variant": "projected",
+      "run": 0,
+      "expected": "take_cover",
+      "got": "take_cover",
+      "confidence": 1,
+      "inputTokens": 757,
+      "latencyMs": 316.421292
+    },
+    {
+      "scenario": "s00060",
+      "variant": "projected",
+      "run": 1,
+      "expected": "take_cover",
+      "got": "take_cover",
+      "confidence": 1,
+      "inputTokens": 757,
+      "latencyMs": 320.8112089999995
+    },
+    {
+      "scenario": "s00081",
+      "variant": "raw",
+      "run": 1,
+      "expected": "take_cover",
+      "got": "take_cover",
+      "confidence": 0.77,
+      "inputTokens": 1817,
+      "latencyMs": 309.5628749999996
+    },
+    {
+      "scenario": "s00081",
+      "variant": "raw",
+      "run": 0,
+      "expected": "take_cover",
+      "got": "take_cover",
+      "confidence": 0.7,
+      "inputTokens": 1817,
+      "latencyMs": 359.3259589999998
+    },
+    {
+      "scenario": "s00060",
+      "variant": "projected",
+      "run": 2,
+      "expected": "take_cover",
+      "got": "take_cover",
+      "confidence": 1,
+      "inputTokens": 757,
+      "latencyMs": 361.7575419999994
+    },
+    {
+      "scenario": "s00081",
+      "variant": "raw",
+      "run": 2,
+      "expected": "take_cover",
+      "got": "take_cover",
+      "confidence": 0.68,
+      "inputTokens": 1817,
+      "latencyMs": 384.8042080000005
+    },
+    {
+      "scenario": "s00081",
+      "variant": "projected",
+      "run": 0,
+      "expected": "take_cover",
+      "got": "take_cover",
+      "confidence": 1,
+      "inputTokens": 756,
+      "latencyMs": 319.1192090000004
+    },
+    {
+      "scenario": "s00081",
+      "variant": "projected",
+      "run": 1,
+      "expected": "take_cover",
+      "got": "take_cover",
+      "confidence": 1,
+      "inputTokens": 756,
+      "latencyMs": 337.24412500000017
+    },
+    {
+      "scenario": "s00094",
+      "variant": "raw",
+      "run": 0,
+      "expected": "take_cover",
+      "got": "take_cover",
+      "confidence": 0.62,
+      "inputTokens": 1935,
+      "latencyMs": 322.35883400000057
+    },
+    {
+      "scenario": "s00081",
+      "variant": "projected",
+      "run": 2,
+      "expected": "take_cover",
+      "got": "take_cover",
+      "confidence": 1,
+      "inputTokens": 756,
+      "latencyMs": 358.88374999999996
+    },
+    {
+      "scenario": "s00094",
+      "variant": "raw",
+      "run": 1,
+      "expected": "take_cover",
+      "got": "take_cover",
+      "confidence": 0.76,
+      "inputTokens": 1935,
+      "latencyMs": 370.23733300000004
+    },
+    {
+      "scenario": "s00094",
+      "variant": "raw",
+      "run": 2,
+      "expected": "take_cover",
+      "got": "take_cover",
+      "confidence": 0.63,
+      "inputTokens": 1935,
+      "latencyMs": 329.5091250000005
+    },
+    {
+      "scenario": "s00094",
+      "variant": "projected",
+      "run": 0,
+      "expected": "take_cover",
+      "got": "take_cover",
+      "confidence": 1,
+      "inputTokens": 759,
+      "latencyMs": 312.56245800000033
+    },
+    {
+      "scenario": "s00094",
+      "variant": "projected",
+      "run": 1,
+      "expected": "take_cover",
+      "got": "take_cover",
+      "confidence": 1,
+      "inputTokens": 759,
+      "latencyMs": 318.00383299999976
+    },
+    {
+      "scenario": "s00094",
+      "variant": "projected",
+      "run": 2,
+      "expected": "take_cover",
+      "got": "take_cover",
+      "confidence": 1,
+      "inputTokens": 759,
+      "latencyMs": 326.000583
+    },
+    {
+      "scenario": "s00096",
+      "variant": "raw",
+      "run": 1,
+      "expected": "take_cover",
+      "got": "take_cover",
+      "confidence": 1,
+      "inputTokens": 1550,
+      "latencyMs": 340.23345900000004
+    },
+    {
+      "scenario": "s00096",
+      "variant": "raw",
+      "run": 0,
+      "expected": "take_cover",
+      "got": "take_cover",
+      "confidence": 1,
+      "inputTokens": 1550,
+      "latencyMs": 354.47662500000024
+    },
+    {
+      "scenario": "s00096",
+      "variant": "raw",
+      "run": 2,
+      "expected": "take_cover",
+      "got": "take_cover",
+      "confidence": 1,
+      "inputTokens": 1550,
+      "latencyMs": 325.5340840000008
+    },
+    {
+      "scenario": "s00096",
+      "variant": "projected",
+      "run": 0,
+      "expected": "take_cover",
+      "got": "take_cover",
+      "confidence": 1,
+      "inputTokens": 758,
+      "latencyMs": 312.02637500000037
+    },
+    {
+      "scenario": "s00096",
+      "variant": "projected",
+      "run": 1,
+      "expected": "take_cover",
+      "got": "take_cover",
+      "confidence": 1,
+      "inputTokens": 758,
+      "latencyMs": 317.5227500000001
+    },
+    {
+      "scenario": "s00096",
+      "variant": "projected",
+      "run": 2,
+      "expected": "take_cover",
+      "got": "take_cover",
+      "confidence": 1,
+      "inputTokens": 758,
+      "latencyMs": 313.9081249999999
+    },
+    {
+      "scenario": "s00102",
+      "variant": "raw",
+      "run": 0,
+      "expected": "take_cover",
+      "got": "take_cover",
+      "confidence": 0.96,
+      "inputTokens": 1945,
+      "latencyMs": 339.1211659999999
+    },
+    {
+      "scenario": "s00102",
+      "variant": "raw",
+      "run": 2,
+      "expected": "take_cover",
+      "got": "take_cover",
+      "confidence": 0.97,
+      "inputTokens": 1945,
+      "latencyMs": 337.295083
+    },
+    {
+      "scenario": "s00102",
+      "variant": "projected",
+      "run": 0,
+      "expected": "take_cover",
+      "got": "take_cover",
+      "confidence": 1,
+      "inputTokens": 743,
+      "latencyMs": 315.7385409999997
+    },
+    {
+      "scenario": "s00102",
+      "variant": "raw",
+      "run": 1,
+      "expected": "take_cover",
+      "got": "take_cover",
+      "confidence": 0.96,
+      "inputTokens": 1945,
+      "latencyMs": 380.8752079999995
+    },
+    {
+      "scenario": "s00102",
+      "variant": "projected",
+      "run": 1,
+      "expected": "take_cover",
+      "got": "take_cover",
+      "confidence": 1,
+      "inputTokens": 743,
+      "latencyMs": 346.37670900000103
+    },
+    {
+      "scenario": "s00102",
+      "variant": "projected",
+      "run": 2,
+      "expected": "take_cover",
+      "got": "take_cover",
+      "confidence": 1,
+      "inputTokens": 743,
+      "latencyMs": 378.44779199999994
+    },
+    {
+      "scenario": "s00011",
+      "variant": "raw",
+      "run": 0,
+      "expected": "heal",
+      "got": "patrol",
+      "confidence": 0.52,
+      "inputTokens": 868,
+      "latencyMs": 334.89995799999997
+    },
+    {
+      "scenario": "s00011",
+      "variant": "raw",
+      "run": 1,
+      "expected": "heal",
+      "got": "heal",
+      "confidence": 0.41,
+      "inputTokens": 868,
+      "latencyMs": 309.70437500000116
+    },
+    {
+      "scenario": "s00011",
+      "variant": "raw",
+      "run": 2,
+      "expected": "heal",
+      "got": "patrol",
+      "confidence": 0.5,
+      "inputTokens": 868,
+      "latencyMs": 325.32074999999986
+    },
+    {
+      "scenario": "s00011",
+      "variant": "projected",
+      "run": 0,
+      "expected": "heal",
+      "got": "heal",
+      "confidence": 1,
+      "inputTokens": 640,
+      "latencyMs": 323.2822499999984
+    },
+    {
+      "scenario": "s00011",
+      "variant": "projected",
+      "run": 1,
+      "expected": "heal",
+      "got": "heal",
+      "confidence": 1,
+      "inputTokens": 640,
+      "latencyMs": 421.36312499999985
+    },
+    {
+      "scenario": "s00011",
+      "variant": "projected",
+      "run": 2,
+      "expected": "heal",
+      "got": "heal",
+      "confidence": 1,
+      "inputTokens": 640,
+      "latencyMs": 310.7753750000011
+    },
+    {
+      "scenario": "s00012",
+      "variant": "raw",
+      "run": 0,
+      "expected": "heal",
+      "got": "take_cover",
+      "confidence": 0.7,
+      "inputTokens": 1944,
+      "latencyMs": 568.05825
+    },
+    {
+      "scenario": "s00012",
+      "variant": "raw",
+      "run": 1,
+      "expected": "heal",
+      "got": "take_cover",
+      "confidence": 0.58,
+      "inputTokens": 1944,
+      "latencyMs": 542.5687089999992
+    },
+    {
+      "scenario": "s00012",
+      "variant": "raw",
+      "run": 2,
+      "expected": "heal",
+      "got": "take_cover",
+      "confidence": 0.83,
+      "inputTokens": 1944,
+      "latencyMs": 422.1159580000003
+    },
+    {
+      "scenario": "s00012",
+      "variant": "projected",
+      "run": 0,
+      "expected": "heal",
+      "got": "heal",
+      "confidence": 0.98,
+      "inputTokens": 753,
+      "latencyMs": 356.66912500000035
+    },
+    {
+      "scenario": "s00012",
+      "variant": "projected",
+      "run": 1,
+      "expected": "heal",
+      "got": "heal",
+      "confidence": 0.97,
+      "inputTokens": 753,
+      "latencyMs": 360.44379200000003
+    },
+    {
+      "scenario": "s00012",
+      "variant": "projected",
+      "run": 2,
+      "expected": "heal",
+      "got": "heal",
+      "confidence": 0.98,
+      "inputTokens": 753,
+      "latencyMs": 323.44991700000173
+    },
+    {
+      "scenario": "s00018",
+      "variant": "raw",
+      "run": 1,
+      "expected": "heal",
+      "got": "heal",
+      "confidence": 0.34,
+      "inputTokens": 880,
+      "latencyMs": 328.51945800000067
+    },
+    {
+      "scenario": "s00018",
+      "variant": "raw",
+      "run": 0,
+      "expected": "heal",
+      "got": "heal",
+      "confidence": 0.4,
+      "inputTokens": 880,
+      "latencyMs": 386.787624999999
+    },
+    {
+      "scenario": "s00018",
+      "variant": "projected",
+      "run": 0,
+      "expected": "heal",
+      "got": "heal",
+      "confidence": 0.99,
+      "inputTokens": 654,
+      "latencyMs": 323.8098339999997
+    },
+    {
+      "scenario": "s00018",
+      "variant": "raw",
+      "run": 2,
+      "expected": "heal",
+      "got": "heal",
+      "confidence": 0.41,
+      "inputTokens": 880,
+      "latencyMs": 380.4057079999984
+    },
+    {
+      "scenario": "s00018",
+      "variant": "projected",
+      "run": 1,
+      "expected": "heal",
+      "got": "heal",
+      "confidence": 0.99,
+      "inputTokens": 654,
+      "latencyMs": 317.0710419999996
+    },
+    {
+      "scenario": "s00018",
+      "variant": "projected",
+      "run": 2,
+      "expected": "heal",
+      "got": "heal",
+      "confidence": 0.99,
+      "inputTokens": 654,
+      "latencyMs": 344.64224999999897
+    },
+    {
+      "scenario": "s00035",
+      "variant": "raw",
+      "run": 0,
+      "expected": "heal",
+      "got": "heal",
+      "confidence": 0.64,
+      "inputTokens": 1283,
+      "latencyMs": 333.45579200000066
+    },
+    {
+      "scenario": "s00035",
+      "variant": "raw",
+      "run": 2,
+      "expected": "heal",
+      "got": "heal",
+      "confidence": 0.63,
+      "inputTokens": 1283,
+      "latencyMs": 310.92433399999936
+    },
+    {
+      "scenario": "s00035",
+      "variant": "raw",
+      "run": 1,
+      "expected": "heal",
+      "got": "heal",
+      "confidence": 0.69,
+      "inputTokens": 1283,
+      "latencyMs": 385.1711660000001
+    },
+    {
+      "scenario": "s00035",
+      "variant": "projected",
+      "run": 0,
+      "expected": "heal",
+      "got": "heal",
+      "confidence": 0.92,
+      "inputTokens": 717,
+      "latencyMs": 325.54633399999875
+    },
+    {
+      "scenario": "s00035",
+      "variant": "projected",
+      "run": 1,
+      "expected": "heal",
+      "got": "heal",
+      "confidence": 0.91,
+      "inputTokens": 717,
+      "latencyMs": 370.03454200000124
+    },
+    {
+      "scenario": "s00035",
+      "variant": "projected",
+      "run": 2,
+      "expected": "heal",
+      "got": "heal",
+      "confidence": 0.91,
+      "inputTokens": 717,
+      "latencyMs": 324.7830419999991
+    },
+    {
+      "scenario": "s00045",
+      "variant": "raw",
+      "run": 0,
+      "expected": "heal",
+      "got": "heal",
+      "confidence": 0.86,
+      "inputTokens": 880,
+      "latencyMs": 307.56608400000005
+    },
+    {
+      "scenario": "s00045",
+      "variant": "raw",
+      "run": 1,
+      "expected": "heal",
+      "got": "heal",
+      "confidence": 0.85,
+      "inputTokens": 880,
+      "latencyMs": 358.59200000000055
+    },
+    {
+      "scenario": "s00045",
+      "variant": "projected",
+      "run": 1,
+      "expected": "heal",
+      "got": "heal",
+      "confidence": 0.99,
+      "inputTokens": 653,
+      "latencyMs": 322.85683400000016
+    },
+    {
+      "scenario": "s00045",
+      "variant": "raw",
+      "run": 2,
+      "expected": "heal",
+      "got": "heal",
+      "confidence": 0.82,
+      "inputTokens": 880,
+      "latencyMs": 410.5152079999989
+    },
+    {
+      "scenario": "s00045",
+      "variant": "projected",
+      "run": 0,
+      "expected": "heal",
+      "got": "heal",
+      "confidence": 1,
+      "inputTokens": 653,
+      "latencyMs": 356.58779200000026
+    },
+    {
+      "scenario": "s00045",
+      "variant": "projected",
+      "run": 2,
+      "expected": "heal",
+      "got": "heal",
+      "confidence": 0.99,
+      "inputTokens": 653,
+      "latencyMs": 369.1994169999998
+    },
+    {
+      "scenario": "s00049",
+      "variant": "raw",
+      "run": 0,
+      "expected": "heal",
+      "got": "attack",
+      "confidence": 0.57,
+      "inputTokens": 1285,
+      "latencyMs": 319.7458750000005
+    },
+    {
+      "scenario": "s00049",
+      "variant": "raw",
+      "run": 1,
+      "expected": "heal",
+      "got": "attack",
+      "confidence": 0.5,
+      "inputTokens": 1285,
+      "latencyMs": 322.73008299999856
+    },
+    {
+      "scenario": "s00049",
+      "variant": "projected",
+      "run": 0,
+      "expected": "heal",
+      "got": "heal",
+      "confidence": 0.97,
+      "inputTokens": 719,
+      "latencyMs": 327.5999579999989
+    },
+    {
+      "scenario": "s00049",
+      "variant": "raw",
+      "run": 2,
+      "expected": "heal",
+      "got": "attack",
+      "confidence": 0.55,
+      "inputTokens": 1285,
+      "latencyMs": 366.5587919999998
+    },
+    {
+      "scenario": "s00049",
+      "variant": "projected",
+      "run": 1,
+      "expected": "heal",
+      "got": "heal",
+      "confidence": 0.97,
+      "inputTokens": 719,
+      "latencyMs": 300.5717910000003
+    },
+    {
+      "scenario": "s00049",
+      "variant": "projected",
+      "run": 2,
+      "expected": "heal",
+      "got": "heal",
+      "confidence": 0.96,
+      "inputTokens": 719,
+      "latencyMs": 303.47583400000076
+    },
+    {
+      "scenario": "s00056",
+      "variant": "raw",
+      "run": 0,
+      "expected": "heal",
+      "got": "heal",
+      "confidence": 0.46,
+      "inputTokens": 1410,
+      "latencyMs": 325.91179100000045
+    },
+    {
+      "scenario": "s00056",
+      "variant": "raw",
+      "run": 1,
+      "expected": "heal",
+      "got": "heal",
+      "confidence": 0.41,
+      "inputTokens": 1410,
+      "latencyMs": 314.1422079999993
+    },
+    {
+      "scenario": "s00056",
+      "variant": "raw",
+      "run": 2,
+      "expected": "heal",
+      "got": "attack",
+      "confidence": 0.46,
+      "inputTokens": 1410,
+      "latencyMs": 308.1142920000002
+    },
+    {
+      "scenario": "s00056",
+      "variant": "projected",
+      "run": 0,
+      "expected": "heal",
+      "got": "heal",
+      "confidence": 0.98,
+      "inputTokens": 737,
+      "latencyMs": 294.79812499999935
+    },
+    {
+      "scenario": "s00056",
+      "variant": "projected",
+      "run": 1,
+      "expected": "heal",
+      "got": "heal",
+      "confidence": 0.98,
+      "inputTokens": 737,
+      "latencyMs": 372.3264589999999
+    },
+    {
+      "scenario": "s00056",
+      "variant": "projected",
+      "run": 2,
+      "expected": "heal",
+      "got": "heal",
+      "confidence": 0.97,
+      "inputTokens": 737,
+      "latencyMs": 324.61383300000125
+    },
+    {
+      "scenario": "s00063",
+      "variant": "raw",
+      "run": 0,
+      "expected": "heal",
+      "got": "heal",
+      "confidence": 0.78,
+      "inputTokens": 1685,
+      "latencyMs": 314.7494999999999
+    },
+    {
+      "scenario": "s00063",
+      "variant": "raw",
+      "run": 2,
+      "expected": "heal",
+      "got": "heal",
+      "confidence": 0.79,
+      "inputTokens": 1685,
+      "latencyMs": 348.4786669999994
+    },
+    {
+      "scenario": "s00063",
+      "variant": "raw",
+      "run": 1,
+      "expected": "heal",
+      "got": "heal",
+      "confidence": 0.79,
+      "inputTokens": 1685,
+      "latencyMs": 370.97858300000007
+    },
+    {
+      "scenario": "s00063",
+      "variant": "projected",
+      "run": 0,
+      "expected": "heal",
+      "got": "heal",
+      "confidence": 0.97,
+      "inputTokens": 761,
+      "latencyMs": 325.25554100000045
+    },
+    {
+      "scenario": "s00063",
+      "variant": "projected",
+      "run": 1,
+      "expected": "heal",
+      "got": "heal",
+      "confidence": 0.96,
+      "inputTokens": 761,
+      "latencyMs": 294.99212499999885
+    },
+    {
+      "scenario": "s00063",
+      "variant": "projected",
+      "run": 2,
+      "expected": "heal",
+      "got": "heal",
+      "confidence": 0.96,
+      "inputTokens": 761,
+      "latencyMs": 345.9549589999988
+    },
+    {
+      "scenario": "s00066",
+      "variant": "raw",
+      "run": 0,
+      "expected": "heal",
+      "got": "retreat",
+      "confidence": 0.44,
+      "inputTokens": 1532,
+      "latencyMs": 319.41699999999946
+    },
+    {
+      "scenario": "s00066",
+      "variant": "raw",
+      "run": 1,
+      "expected": "heal",
+      "got": "retreat",
+      "confidence": 0.49,
+      "inputTokens": 1532,
+      "latencyMs": 319.2478339999998
+    },
+    {
+      "scenario": "s00066",
+      "variant": "raw",
+      "run": 2,
+      "expected": "heal",
+      "got": "retreat",
+      "confidence": 0.51,
+      "inputTokens": 1532,
+      "latencyMs": 315.9222920000011
+    },
+    {
+      "scenario": "s00066",
+      "variant": "projected",
+      "run": 0,
+      "expected": "heal",
+      "got": "heal",
+      "confidence": 0.98,
+      "inputTokens": 743,
+      "latencyMs": 320.76758399999926
+    },
+    {
+      "scenario": "s00066",
+      "variant": "projected",
+      "run": 1,
+      "expected": "heal",
+      "got": "heal",
+      "confidence": 0.98,
+      "inputTokens": 743,
+      "latencyMs": 331.57454099999995
+    },
+    {
+      "scenario": "s00068",
+      "variant": "raw",
+      "run": 0,
+      "expected": "heal",
+      "got": "heal",
+      "confidence": 0.96,
+      "inputTokens": 863,
+      "latencyMs": 311.27549999999974
+    },
+    {
+      "scenario": "s00066",
+      "variant": "projected",
+      "run": 2,
+      "expected": "heal",
+      "got": "heal",
+      "confidence": 0.98,
+      "inputTokens": 743,
+      "latencyMs": 380.9845000000005
+    },
+    {
+      "scenario": "s00068",
+      "variant": "raw",
+      "run": 1,
+      "expected": "heal",
+      "got": "heal",
+      "confidence": 0.95,
+      "inputTokens": 863,
+      "latencyMs": 454.8071660000005
+    },
+    {
+      "scenario": "s00068",
+      "variant": "raw",
+      "run": 2,
+      "expected": "heal",
+      "got": "heal",
+      "confidence": 0.93,
+      "inputTokens": 863,
+      "latencyMs": 312.8778340000008
+    },
+    {
+      "scenario": "s00068",
+      "variant": "projected",
+      "run": 0,
+      "expected": "heal",
+      "got": "heal",
+      "confidence": 1,
+      "inputTokens": 640,
+      "latencyMs": 321.15258299999914
+    },
+    {
+      "scenario": "s00068",
+      "variant": "projected",
+      "run": 1,
+      "expected": "heal",
+      "got": "heal",
+      "confidence": 1,
+      "inputTokens": 640,
+      "latencyMs": 349.45308300000033
+    },
+    {
+      "scenario": "s00068",
+      "variant": "projected",
+      "run": 2,
+      "expected": "heal",
+      "got": "heal",
+      "confidence": 1,
+      "inputTokens": 640,
+      "latencyMs": 330.8327079999999
+    },
+    {
+      "scenario": "s00001",
+      "variant": "raw",
+      "run": 0,
+      "expected": "reload",
+      "got": "reload",
+      "confidence": 0.81,
+      "inputTokens": 879,
+      "latencyMs": 359.906332999999
+    },
+    {
+      "scenario": "s00001",
+      "variant": "raw",
+      "run": 1,
+      "expected": "reload",
+      "got": "reload",
+      "confidence": 0.81,
+      "inputTokens": 879,
+      "latencyMs": 361.457124999999
+    },
+    {
+      "scenario": "s00001",
+      "variant": "raw",
+      "run": 2,
+      "expected": "reload",
+      "got": "reload",
+      "confidence": 0.79,
+      "inputTokens": 879,
+      "latencyMs": 316.1426249999986
+    },
+    {
+      "scenario": "s00001",
+      "variant": "projected",
+      "run": 0,
+      "expected": "reload",
+      "got": "reload",
+      "confidence": 0.69,
+      "inputTokens": 655,
+      "latencyMs": 320.46399999999994
+    },
+    {
+      "scenario": "s00001",
+      "variant": "projected",
+      "run": 1,
+      "expected": "reload",
+      "got": "reload",
+      "confidence": 0.73,
+      "inputTokens": 655,
+      "latencyMs": 353.77333400000134
+    },
+    {
+      "scenario": "s00001",
+      "variant": "projected",
+      "run": 2,
+      "expected": "reload",
+      "got": "reload",
+      "confidence": 0.72,
+      "inputTokens": 655,
+      "latencyMs": 330.93345800000134
+    },
+    {
+      "scenario": "s00003",
+      "variant": "raw",
+      "run": 1,
+      "expected": "reload",
+      "got": "reload",
+      "confidence": 0.87,
+      "inputTokens": 874,
+      "latencyMs": 311.17462500000147
+    },
+    {
+      "scenario": "s00003",
+      "variant": "raw",
+      "run": 0,
+      "expected": "reload",
+      "got": "reload",
+      "confidence": 0.86,
+      "inputTokens": 874,
+      "latencyMs": 356.3707919999997
+    },
+    {
+      "scenario": "s00003",
+      "variant": "raw",
+      "run": 2,
+      "expected": "reload",
+      "got": "reload",
+      "confidence": 0.83,
+      "inputTokens": 874,
+      "latencyMs": 348.6258749999997
+    },
+    {
+      "scenario": "s00003",
+      "variant": "projected",
+      "run": 0,
+      "expected": "reload",
+      "got": "reload",
+      "confidence": 0.84,
+      "inputTokens": 654,
+      "latencyMs": 328.3201250000002
+    },
+    {
+      "scenario": "s00003",
+      "variant": "projected",
+      "run": 1,
+      "expected": "reload",
+      "got": "reload",
+      "confidence": 0.84,
+      "inputTokens": 654,
+      "latencyMs": 336.1970000000001
+    },
+    {
+      "scenario": "s00004",
+      "variant": "raw",
+      "run": 0,
+      "expected": "reload",
+      "got": "reload",
+      "confidence": 0.97,
+      "inputTokens": 1135,
+      "latencyMs": 310.4360420000012
+    },
+    {
+      "scenario": "s00003",
+      "variant": "projected",
+      "run": 2,
+      "expected": "reload",
+      "got": "reload",
+      "confidence": 0.83,
+      "inputTokens": 654,
+      "latencyMs": 351.6194169999999
+    },
+    {
+      "scenario": "s00004",
+      "variant": "raw",
+      "run": 1,
+      "expected": "reload",
+      "got": "reload",
+      "confidence": 0.97,
+      "inputTokens": 1135,
+      "latencyMs": 331.67341599999963
+    },
+    {
+      "scenario": "s00004",
+      "variant": "raw",
+      "run": 2,
+      "expected": "reload",
+      "got": "reload",
+      "confidence": 0.97,
+      "inputTokens": 1135,
+      "latencyMs": 303.1676669999997
+    },
+    {
+      "scenario": "s00004",
+      "variant": "projected",
+      "run": 0,
+      "expected": "reload",
+      "got": "reload",
+      "confidence": 0.93,
+      "inputTokens": 699,
+      "latencyMs": 356.01729200000045
+    },
+    {
+      "scenario": "s00004",
+      "variant": "projected",
+      "run": 1,
+      "expected": "reload",
+      "got": "reload",
+      "confidence": 0.92,
+      "inputTokens": 699,
+      "latencyMs": 347.6359169999996
+    },
+    {
+      "scenario": "s00004",
+      "variant": "projected",
+      "run": 2,
+      "expected": "reload",
+      "got": "reload",
+      "confidence": 0.93,
+      "inputTokens": 699,
+      "latencyMs": 333.4972080000007
+    },
+    {
+      "scenario": "s00021",
+      "variant": "raw",
+      "run": 0,
+      "expected": "reload",
+      "got": "reload",
+      "confidence": 0.84,
+      "inputTokens": 875,
+      "latencyMs": 336.9243750000005
+    },
+    {
+      "scenario": "s00021",
+      "variant": "raw",
+      "run": 1,
+      "expected": "reload",
+      "got": "reload",
+      "confidence": 0.84,
+      "inputTokens": 875,
+      "latencyMs": 365.2201249999998
+    },
+    {
+      "scenario": "s00021",
+      "variant": "projected",
+      "run": 1,
+      "expected": "reload",
+      "got": "reload",
+      "confidence": 0.84,
+      "inputTokens": 653,
+      "latencyMs": 319.6653330000008
+    },
+    {
+      "scenario": "s00021",
+      "variant": "projected",
+      "run": 0,
+      "expected": "reload",
+      "got": "reload",
+      "confidence": 0.9,
+      "inputTokens": 653,
+      "latencyMs": 344.3786249999994
+    },
+    {
+      "scenario": "s00021",
+      "variant": "raw",
+      "run": 2,
+      "expected": "reload",
+      "got": "reload",
+      "confidence": 0.82,
+      "inputTokens": 875,
+      "latencyMs": 362.30433399999856
+    },
+    {
+      "scenario": "s00021",
+      "variant": "projected",
+      "run": 2,
+      "expected": "reload",
+      "got": "reload",
+      "confidence": 0.85,
+      "inputTokens": 653,
+      "latencyMs": 325.94366700000137
+    },
+    {
+      "scenario": "s00030",
+      "variant": "raw",
+      "run": 0,
+      "expected": "reload",
+      "got": "reload",
+      "confidence": 0.52,
+      "inputTokens": 875,
+      "latencyMs": 322.3147079999999
+    },
+    {
+      "scenario": "s00030",
+      "variant": "raw",
+      "run": 2,
+      "expected": "reload",
+      "got": "reload",
+      "confidence": 0.65,
+      "inputTokens": 875,
+      "latencyMs": 321.09941699999945
+    },
+    {
+      "scenario": "s00030",
+      "variant": "raw",
+      "run": 1,
+      "expected": "reload",
+      "got": "reload",
+      "confidence": 0.63,
+      "inputTokens": 875,
+      "latencyMs": 327.2362499999999
+    },
+    {
+      "scenario": "s00030",
+      "variant": "projected",
+      "run": 0,
+      "expected": "reload",
+      "got": "reload",
+      "confidence": 0.85,
+      "inputTokens": 653,
+      "latencyMs": 339.19808300000113
+    },
+    {
+      "scenario": "s00030",
+      "variant": "projected",
+      "run": 1,
+      "expected": "reload",
+      "got": "reload",
+      "confidence": 0.91,
+      "inputTokens": 653,
+      "latencyMs": 309.54879099999926
+    },
+    {
+      "scenario": "s00030",
+      "variant": "projected",
+      "run": 2,
+      "expected": "reload",
+      "got": "reload",
+      "confidence": 0.85,
+      "inputTokens": 653,
+      "latencyMs": 303.8083750000005
+    },
+    {
+      "scenario": "s00036",
+      "variant": "raw",
+      "run": 1,
+      "expected": "reload",
+      "got": "reload",
+      "confidence": 0.96,
+      "inputTokens": 866,
+      "latencyMs": 320.7475830000003
+    },
+    {
+      "scenario": "s00036",
+      "variant": "raw",
+      "run": 0,
+      "expected": "reload",
+      "got": "reload",
+      "confidence": 0.94,
+      "inputTokens": 866,
+      "latencyMs": 343.16062500000044
+    },
+    {
+      "scenario": "s00036",
+      "variant": "raw",
+      "run": 2,
+      "expected": "reload",
+      "got": "reload",
+      "confidence": 0.92,
+      "inputTokens": 866,
+      "latencyMs": 349.7603339999987
+    },
+    {
+      "scenario": "s00036",
+      "variant": "projected",
+      "run": 0,
+      "expected": "reload",
+      "got": "reload",
+      "confidence": 1,
+      "inputTokens": 639,
+      "latencyMs": 330.3958330000005
+    },
+    {
+      "scenario": "s00036",
+      "variant": "projected",
+      "run": 1,
+      "expected": "reload",
+      "got": "reload",
+      "confidence": 1,
+      "inputTokens": 639,
+      "latencyMs": 358.9852499999997
+    },
+    {
+      "scenario": "s00055",
+      "variant": "raw",
+      "run": 0,
+      "expected": "reload",
+      "got": "reload",
+      "confidence": 0.5,
+      "inputTokens": 883,
+      "latencyMs": 354.21370800000113
+    },
+    {
+      "scenario": "s00055",
+      "variant": "raw",
+      "run": 2,
+      "expected": "reload",
+      "got": "reload",
+      "confidence": 0.52,
+      "inputTokens": 883,
+      "latencyMs": 313.61149999999907
+    },
+    {
+      "scenario": "s00055",
+      "variant": "raw",
+      "run": 1,
+      "expected": "reload",
+      "got": "reload",
+      "confidence": 0.44,
+      "inputTokens": 883,
+      "latencyMs": 326.2080839999999
+    },
+    {
+      "scenario": "s00036",
+      "variant": "projected",
+      "run": 2,
+      "expected": "reload",
+      "got": "reload",
+      "confidence": 0.99,
+      "inputTokens": 639,
+      "latencyMs": 407.84329199999956
+    },
+    {
+      "scenario": "s00055",
+      "variant": "projected",
+      "run": 0,
+      "expected": "reload",
+      "got": "reload",
+      "confidence": 0.7,
+      "inputTokens": 655,
+      "latencyMs": 321.7365000000009
+    },
+    {
+      "scenario": "s00055",
+      "variant": "projected",
+      "run": 2,
+      "expected": "reload",
+      "got": "reload",
+      "confidence": 0.76,
+      "inputTokens": 655,
+      "latencyMs": 296.1905420000003
+    },
+    {
+      "scenario": "s00055",
+      "variant": "projected",
+      "run": 1,
+      "expected": "reload",
+      "got": "reload",
+      "confidence": 0.75,
+      "inputTokens": 655,
+      "latencyMs": 311.10641699999906
+    },
+    {
+      "scenario": "s00071",
+      "variant": "raw",
+      "run": 0,
+      "expected": "reload",
+      "got": "heal",
+      "confidence": 0.84,
+      "inputTokens": 878,
+      "latencyMs": 349.62791599999946
+    },
+    {
+      "scenario": "s00071",
+      "variant": "raw",
+      "run": 1,
+      "expected": "reload",
+      "got": "heal",
+      "confidence": 0.84,
+      "inputTokens": 878,
+      "latencyMs": 350.9252499999984
+    },
+    {
+      "scenario": "s00071",
+      "variant": "raw",
+      "run": 2,
+      "expected": "reload",
+      "got": "heal",
+      "confidence": 0.84,
+      "inputTokens": 878,
+      "latencyMs": 371.43195800000103
+    },
+    {
+      "scenario": "s00071",
+      "variant": "projected",
+      "run": 1,
+      "expected": "reload",
+      "got": "reload",
+      "confidence": 0.9,
+      "inputTokens": 654,
+      "latencyMs": 316.5193330000002
+    },
+    {
+      "scenario": "s00071",
+      "variant": "projected",
+      "run": 0,
+      "expected": "reload",
+      "got": "reload",
+      "confidence": 0.91,
+      "inputTokens": 654,
+      "latencyMs": 340.3004170000004
+    },
+    {
+      "scenario": "s00074",
+      "variant": "raw",
+      "run": 0,
+      "expected": "reload",
+      "got": "reload",
+      "confidence": 0.77,
+      "inputTokens": 876,
+      "latencyMs": 315.28899999999885
+    },
+    {
+      "scenario": "s00071",
+      "variant": "projected",
+      "run": 2,
+      "expected": "reload",
+      "got": "reload",
+      "confidence": 0.93,
+      "inputTokens": 654,
+      "latencyMs": 366.8623749999988
+    },
+    {
+      "scenario": "s00074",
+      "variant": "raw",
+      "run": 1,
+      "expected": "reload",
+      "got": "reload",
+      "confidence": 0.76,
+      "inputTokens": 876,
+      "latencyMs": 306.9487079999999
+    },
+    {
+      "scenario": "s00074",
+      "variant": "projected",
+      "run": 0,
+      "expected": "reload",
+      "got": "reload",
+      "confidence": 0.79,
+      "inputTokens": 654,
+      "latencyMs": 348.47583400000076
+    },
+    {
+      "scenario": "s00074",
+      "variant": "raw",
+      "run": 2,
+      "expected": "reload",
+      "got": "reload",
+      "confidence": 0.78,
+      "inputTokens": 876,
+      "latencyMs": 365.02008299999943
+    },
+    {
+      "scenario": "s00074",
+      "variant": "projected",
+      "run": 1,
+      "expected": "reload",
+      "got": "reload",
+      "confidence": 0.76,
+      "inputTokens": 654,
+      "latencyMs": 325.85349999999926
+    },
+    {
+      "scenario": "s00074",
+      "variant": "projected",
+      "run": 2,
+      "expected": "reload",
+      "got": "reload",
+      "confidence": 0.73,
+      "inputTokens": 654,
+      "latencyMs": 351.90283400000044
+    },
+    {
+      "scenario": "s00078",
+      "variant": "raw",
+      "run": 0,
+      "expected": "reload",
+      "got": "reload",
+      "confidence": 0.92,
+      "inputTokens": 1141,
+      "latencyMs": 464.8829160000005
+    },
+    {
+      "scenario": "s00078",
+      "variant": "raw",
+      "run": 2,
+      "expected": "reload",
+      "got": "reload",
+      "confidence": 0.91,
+      "inputTokens": 1141,
+      "latencyMs": 319.33820899999955
+    },
+    {
+      "scenario": "s00078",
+      "variant": "projected",
+      "run": 0,
+      "expected": "reload",
+      "got": "reload",
+      "confidence": 0.97,
+      "inputTokens": 698,
+      "latencyMs": 305.02679200000057
+    },
+    {
+      "scenario": "s00078",
+      "variant": "raw",
+      "run": 1,
+      "expected": "reload",
+      "got": "reload",
+      "confidence": 0.9,
+      "inputTokens": 1141,
+      "latencyMs": 355.7206249999981
+    },
+    {
+      "scenario": "s00078",
+      "variant": "projected",
+      "run": 1,
+      "expected": "reload",
+      "got": "reload",
+      "confidence": 0.96,
+      "inputTokens": 698,
+      "latencyMs": 338.22762499999953
+    },
+    {
+      "scenario": "s00078",
+      "variant": "projected",
+      "run": 2,
+      "expected": "reload",
+      "got": "reload",
+      "confidence": 0.97,
+      "inputTokens": 698,
+      "latencyMs": 358.90599999999904
+    },
+    {
+      "scenario": "s00005",
+      "variant": "raw",
+      "run": 0,
+      "expected": "attack",
+      "got": "attack",
+      "confidence": 0.96,
+      "inputTokens": 1544,
+      "latencyMs": 315.59133400000064
+    },
+    {
+      "scenario": "s00005",
+      "variant": "raw",
+      "run": 1,
+      "expected": "attack",
+      "got": "attack",
+      "confidence": 0.94,
+      "inputTokens": 1544,
+      "latencyMs": 315.231917000001
+    },
+    {
+      "scenario": "s00005",
+      "variant": "raw",
+      "run": 2,
+      "expected": "attack",
+      "got": "attack",
+      "confidence": 0.94,
+      "inputTokens": 1544,
+      "latencyMs": 341.9431250000016
+    },
+    {
+      "scenario": "s00005",
+      "variant": "projected",
+      "run": 0,
+      "expected": "attack",
+      "got": "attack",
+      "confidence": 1,
+      "inputTokens": 759,
+      "latencyMs": 308.341290999997
+    },
+    {
+      "scenario": "s00005",
+      "variant": "projected",
+      "run": 1,
+      "expected": "attack",
+      "got": "attack",
+      "confidence": 1,
+      "inputTokens": 759,
+      "latencyMs": 308.93933299999844
+    },
+    {
+      "scenario": "s00005",
+      "variant": "projected",
+      "run": 2,
+      "expected": "attack",
+      "got": "attack",
+      "confidence": 1,
+      "inputTokens": 759,
+      "latencyMs": 320.6810839999998
+    },
+    {
+      "scenario": "s00006",
+      "variant": "raw",
+      "run": 0,
+      "expected": "attack",
+      "got": "attack",
+      "confidence": 0.89,
+      "inputTokens": 1410,
+      "latencyMs": 334.1565840000003
+    },
+    {
+      "scenario": "s00006",
+      "variant": "raw",
+      "run": 1,
+      "expected": "attack",
+      "got": "attack",
+      "confidence": 0.87,
+      "inputTokens": 1410,
+      "latencyMs": 332.3169999999991
+    },
+    {
+      "scenario": "s00006",
+      "variant": "raw",
+      "run": 2,
+      "expected": "attack",
+      "got": "attack",
+      "confidence": 0.87,
+      "inputTokens": 1410,
+      "latencyMs": 331.18520799999897
+    },
+    {
+      "scenario": "s00006",
+      "variant": "projected",
+      "run": 0,
+      "expected": "attack",
+      "got": "attack",
+      "confidence": 1,
+      "inputTokens": 737,
+      "latencyMs": 315.67962500000067
+    },
+    {
+      "scenario": "s00006",
+      "variant": "projected",
+      "run": 1,
+      "expected": "attack",
+      "got": "attack",
+      "confidence": 1,
+      "inputTokens": 737,
+      "latencyMs": 306.0583750000005
+    },
+    {
+      "scenario": "s00006",
+      "variant": "projected",
+      "run": 2,
+      "expected": "attack",
+      "got": "attack",
+      "confidence": 1,
+      "inputTokens": 737,
+      "latencyMs": 332.9230830000015
+    },
+    {
+      "scenario": "s00008",
+      "variant": "raw",
+      "run": 0,
+      "expected": "attack",
+      "got": "heal",
+      "confidence": 0.35,
+      "inputTokens": 1142,
+      "latencyMs": 349.9487909999989
+    },
+    {
+      "scenario": "s00008",
+      "variant": "raw",
+      "run": 1,
+      "expected": "attack",
+      "got": "attack",
+      "confidence": 0.37,
+      "inputTokens": 1142,
+      "latencyMs": 377.88933299999917
+    },
+    {
+      "scenario": "s00008",
+      "variant": "raw",
+      "run": 2,
+      "expected": "attack",
+      "got": "heal",
+      "confidence": 0.38,
+      "inputTokens": 1142,
+      "latencyMs": 315.18624999999884
+    },
+    {
+      "scenario": "s00008",
+      "variant": "projected",
+      "run": 0,
+      "expected": "attack",
+      "got": "attack",
+      "confidence": 1,
+      "inputTokens": 701,
+      "latencyMs": 375.30670800000007
+    },
+    {
+      "scenario": "s00008",
+      "variant": "projected",
+      "run": 1,
+      "expected": "attack",
+      "got": "attack",
+      "confidence": 1,
+      "inputTokens": 701,
+      "latencyMs": 343.94704099999944
+    },
+    {
+      "scenario": "s00008",
+      "variant": "projected",
+      "run": 2,
+      "expected": "attack",
+      "got": "attack",
+      "confidence": 1,
+      "inputTokens": 701,
+      "latencyMs": 352.1355000000003
+    },
+    {
+      "scenario": "s00014",
+      "variant": "raw",
+      "run": 0,
+      "expected": "attack",
+      "got": "attack",
+      "confidence": 0.9,
+      "inputTokens": 1410,
+      "latencyMs": 345.6157910000002
+    },
+    {
+      "scenario": "s00014",
+      "variant": "raw",
+      "run": 1,
+      "expected": "attack",
+      "got": "attack",
+      "confidence": 0.94,
+      "inputTokens": 1410,
+      "latencyMs": 343.55458299999736
+    },
+    {
+      "scenario": "s00014",
+      "variant": "raw",
+      "run": 2,
+      "expected": "attack",
+      "got": "attack",
+      "confidence": 0.9,
+      "inputTokens": 1410,
+      "latencyMs": 315.84950000000026
+    },
+    {
+      "scenario": "s00014",
+      "variant": "projected",
+      "run": 0,
+      "expected": "attack",
+      "got": "attack",
+      "confidence": 1,
+      "inputTokens": 737,
+      "latencyMs": 317.4302080000016
+    },
+    {
+      "scenario": "s00014",
+      "variant": "projected",
+      "run": 1,
+      "expected": "attack",
+      "got": "attack",
+      "confidence": 1,
+      "inputTokens": 737,
+      "latencyMs": 353.5067909999998
+    },
+    {
+      "scenario": "s00014",
+      "variant": "projected",
+      "run": 2,
+      "expected": "attack",
+      "got": "attack",
+      "confidence": 1,
+      "inputTokens": 737,
+      "latencyMs": 353.89966600000116
+    },
+    {
+      "scenario": "s00015",
+      "variant": "raw",
+      "run": 0,
+      "expected": "attack",
+      "got": "heal",
+      "confidence": 0.48,
+      "inputTokens": 1414,
+      "latencyMs": 322.7694999999985
+    },
+    {
+      "scenario": "s00015",
+      "variant": "raw",
+      "run": 1,
+      "expected": "attack",
+      "got": "attack",
+      "confidence": 0.4,
+      "inputTokens": 1414,
+      "latencyMs": 316.40512500000114
+    },
+    {
+      "scenario": "s00015",
+      "variant": "raw",
+      "run": 2,
+      "expected": "attack",
+      "got": "heal",
+      "confidence": 0.46,
+      "inputTokens": 1414,
+      "latencyMs": 309.3608340000028
+    },
+    {
+      "scenario": "s00015",
+      "variant": "projected",
+      "run": 0,
+      "expected": "attack",
+      "got": "attack",
+      "confidence": 1,
+      "inputTokens": 739,
+      "latencyMs": 339.05349999999817
+    },
+    {
+      "scenario": "s00015",
+      "variant": "projected",
+      "run": 1,
+      "expected": "attack",
+      "got": "attack",
+      "confidence": 1,
+      "inputTokens": 739,
+      "latencyMs": 316.2430839999979
+    },
+    {
+      "scenario": "s00015",
+      "variant": "projected",
+      "run": 2,
+      "expected": "attack",
+      "got": "attack",
+      "confidence": 1,
+      "inputTokens": 739,
+      "latencyMs": 324.93775000000096
+    },
+    {
+      "scenario": "s00016",
+      "variant": "raw",
+      "run": 0,
+      "expected": "attack",
+      "got": "attack",
+      "confidence": 0.92,
+      "inputTokens": 1673,
+      "latencyMs": 315.77079199999935
+    },
+    {
+      "scenario": "s00016",
+      "variant": "raw",
+      "run": 1,
+      "expected": "attack",
+      "got": "attack",
+      "confidence": 0.94,
+      "inputTokens": 1673,
+      "latencyMs": 314.6167090000017
+    },
+    {
+      "scenario": "s00016",
+      "variant": "raw",
+      "run": 2,
+      "expected": "attack",
+      "got": "attack",
+      "confidence": 0.91,
+      "inputTokens": 1673,
+      "latencyMs": 343.8939160000009
+    },
+    {
+      "scenario": "s00016",
+      "variant": "projected",
+      "run": 0,
+      "expected": "attack",
+      "got": "attack",
+      "confidence": 0.98,
+      "inputTokens": 756,
+      "latencyMs": 333.92462499999965
+    },
+    {
+      "scenario": "s00016",
+      "variant": "projected",
+      "run": 1,
+      "expected": "attack",
+      "got": "attack",
+      "confidence": 0.99,
+      "inputTokens": 756,
+      "latencyMs": 368.247292
+    },
+    {
+      "scenario": "s00016",
+      "variant": "projected",
+      "run": 2,
+      "expected": "attack",
+      "got": "attack",
+      "confidence": 0.99,
+      "inputTokens": 756,
+      "latencyMs": 311.2194579999996
+    },
+    {
+      "scenario": "s00017",
+      "variant": "raw",
+      "run": 0,
+      "expected": "attack",
+      "got": "attack",
+      "confidence": 0.97,
+      "inputTokens": 1132,
+      "latencyMs": 375.97895900000003
+    },
+    {
+      "scenario": "s00017",
+      "variant": "raw",
+      "run": 1,
+      "expected": "attack",
+      "got": "attack",
+      "confidence": 0.96,
+      "inputTokens": 1132,
+      "latencyMs": 318.723750000001
+    },
+    {
+      "scenario": "s00017",
+      "variant": "raw",
+      "run": 2,
+      "expected": "attack",
+      "got": "attack",
+      "confidence": 0.97,
+      "inputTokens": 1132,
+      "latencyMs": 370.1403329999994
+    },
+    {
+      "scenario": "s00017",
+      "variant": "projected",
+      "run": 1,
+      "expected": "attack",
+      "got": "attack",
+      "confidence": 1,
+      "inputTokens": 686,
+      "latencyMs": 358.67766699999993
+    },
+    {
+      "scenario": "s00017",
+      "variant": "projected",
+      "run": 0,
+      "expected": "attack",
+      "got": "attack",
+      "confidence": 1,
+      "inputTokens": 686,
+      "latencyMs": 382.54441699999734
+    },
+    {
+      "scenario": "s00017",
+      "variant": "projected",
+      "run": 2,
+      "expected": "attack",
+      "got": "attack",
+      "confidence": 1,
+      "inputTokens": 686,
+      "latencyMs": 339.3815419999992
+    },
+    {
+      "scenario": "s00019",
+      "variant": "raw",
+      "run": 0,
+      "expected": "attack",
+      "got": "attack",
+      "confidence": 1,
+      "inputTokens": 1547,
+      "latencyMs": 485.0001669999983
+    },
+    {
+      "scenario": "s00019",
+      "variant": "raw",
+      "run": 1,
+      "expected": "attack",
+      "got": "attack",
+      "confidence": 0.99,
+      "inputTokens": 1547,
+      "latencyMs": 429.45416699999987
+    },
+    {
+      "scenario": "s00019",
+      "variant": "projected",
+      "run": 0,
+      "expected": "attack",
+      "got": "attack",
+      "confidence": 1,
+      "inputTokens": 758,
+      "latencyMs": 326.4002909999981
+    },
+    {
+      "scenario": "s00019",
+      "variant": "projected",
+      "run": 1,
+      "expected": "attack",
+      "got": "attack",
+      "confidence": 1,
+      "inputTokens": 758,
+      "latencyMs": 309.96841700000004
+    },
+    {
+      "scenario": "s00019",
+      "variant": "projected",
+      "run": 2,
+      "expected": "attack",
+      "got": "attack",
+      "confidence": 1,
+      "inputTokens": 758,
+      "latencyMs": 321.8222089999981
+    },
+    {
+      "scenario": "s00020",
+      "variant": "raw",
+      "run": 0,
+      "expected": "attack",
+      "got": "attack",
+      "confidence": 0.8,
+      "inputTokens": 1400,
+      "latencyMs": 309.8559580000001
+    },
+    {
+      "scenario": "s00020",
+      "variant": "raw",
+      "run": 1,
+      "expected": "attack",
+      "got": "attack",
+      "confidence": 0.76,
+      "inputTokens": 1400,
+      "latencyMs": 310.2574169999971
+    },
+    {
+      "scenario": "s00019",
+      "variant": "raw",
+      "run": 2,
+      "expected": "attack",
+      "got": "attack",
+      "confidence": 0.99,
+      "inputTokens": 1547,
+      "latencyMs": 700.0848750000005
+    },
+    {
+      "scenario": "s00020",
+      "variant": "raw",
+      "run": 2,
+      "expected": "attack",
+      "got": "attack",
+      "confidence": 0.87,
+      "inputTokens": 1400,
+      "latencyMs": 337.2467089999991
+    },
+    {
+      "scenario": "s00020",
+      "variant": "projected",
+      "run": 2,
+      "expected": "attack",
+      "got": "attack",
+      "confidence": 1,
+      "inputTokens": 724,
+      "latencyMs": 317.8872080000001
+    },
+    {
+      "scenario": "s00020",
+      "variant": "projected",
+      "run": 0,
+      "expected": "attack",
+      "got": "attack",
+      "confidence": 1,
+      "inputTokens": 724,
+      "latencyMs": 343.5939580000013
+    },
+    {
+      "scenario": "s00020",
+      "variant": "projected",
+      "run": 1,
+      "expected": "attack",
+      "got": "attack",
+      "confidence": 1,
+      "inputTokens": 724,
+      "latencyMs": 347.47712500000125
+    },
+    {
+      "scenario": "s00022",
+      "variant": "raw",
+      "run": 1,
+      "expected": "attack",
+      "got": "attack",
+      "confidence": 0.98,
+      "inputTokens": 1555,
+      "latencyMs": 313.37699999999677
+    },
+    {
+      "scenario": "s00022",
+      "variant": "raw",
+      "run": 0,
+      "expected": "attack",
+      "got": "attack",
+      "confidence": 0.98,
+      "inputTokens": 1555,
+      "latencyMs": 337.69420900000114
+    },
+    {
+      "scenario": "s00022",
+      "variant": "projected",
+      "run": 0,
+      "expected": "attack",
+      "got": "attack",
+      "confidence": 1,
+      "inputTokens": 757,
+      "latencyMs": 302.51229100000273
+    },
+    {
+      "scenario": "s00022",
+      "variant": "raw",
+      "run": 2,
+      "expected": "attack",
+      "got": "attack",
+      "confidence": 0.98,
+      "inputTokens": 1555,
+      "latencyMs": 362.0665420000005
+    },
+    {
+      "scenario": "s00022",
+      "variant": "projected",
+      "run": 1,
+      "expected": "attack",
+      "got": "attack",
+      "confidence": 1,
+      "inputTokens": 757,
+      "latencyMs": 359.6849170000023
+    },
+    {
+      "scenario": "s00022",
+      "variant": "projected",
+      "run": 2,
+      "expected": "attack",
+      "got": "attack",
+      "confidence": 1,
+      "inputTokens": 757,
+      "latencyMs": 323.4771660000006
+    },
+    {
+      "scenario": "s00028",
+      "variant": "raw",
+      "run": 0,
+      "expected": "investigate",
+      "got": "investigate",
+      "confidence": 0.71,
+      "inputTokens": 878,
+      "latencyMs": 366.19566699999996
+    },
+    {
+      "scenario": "s00028",
+      "variant": "raw",
+      "run": 1,
+      "expected": "investigate",
+      "got": "investigate",
+      "confidence": 0.75,
+      "inputTokens": 878,
+      "latencyMs": 354.77816600000006
+    },
+    {
+      "scenario": "s00028",
+      "variant": "raw",
+      "run": 2,
+      "expected": "investigate",
+      "got": "investigate",
+      "confidence": 0.65,
+      "inputTokens": 878,
+      "latencyMs": 314.992000000002
+    },
+    {
+      "scenario": "s00028",
+      "variant": "projected",
+      "run": 0,
+      "expected": "investigate",
+      "got": "investigate",
+      "confidence": 1,
+      "inputTokens": 656,
+      "latencyMs": 394.89824999999837
+    },
+    {
+      "scenario": "s00028",
+      "variant": "projected",
+      "run": 2,
+      "expected": "investigate",
+      "got": "investigate",
+      "confidence": 1,
+      "inputTokens": 656,
+      "latencyMs": 351.37616699999853
+    },
+    {
+      "scenario": "s00028",
+      "variant": "projected",
+      "run": 1,
+      "expected": "investigate",
+      "got": "investigate",
+      "confidence": 1,
+      "inputTokens": 656,
+      "latencyMs": 491.81408400000146
+    },
+    {
+      "scenario": "s00041",
+      "variant": "raw",
+      "run": 1,
+      "expected": "investigate",
+      "got": "investigate",
+      "confidence": 0.89,
+      "inputTokens": 878,
+      "latencyMs": 331.1080839999995
+    },
+    {
+      "scenario": "s00041",
+      "variant": "raw",
+      "run": 0,
+      "expected": "investigate",
+      "got": "investigate",
+      "confidence": 0.9,
+      "inputTokens": 878,
+      "latencyMs": 350.41733300000124
+    },
+    {
+      "scenario": "s00041",
+      "variant": "raw",
+      "run": 2,
+      "expected": "investigate",
+      "got": "investigate",
+      "confidence": 0.93,
+      "inputTokens": 878,
+      "latencyMs": 332.22450000000026
+    },
+    {
+      "scenario": "s00041",
+      "variant": "projected",
+      "run": 0,
+      "expected": "investigate",
+      "got": "investigate",
+      "confidence": 1,
+      "inputTokens": 654,
+      "latencyMs": 334.54383300000336
+    },
+    {
+      "scenario": "s00041",
+      "variant": "projected",
+      "run": 1,
+      "expected": "investigate",
+      "got": "investigate",
+      "confidence": 1,
+      "inputTokens": 654,
+      "latencyMs": 309.05175000000236
+    },
+    {
+      "scenario": "s00044",
+      "variant": "raw",
+      "run": 0,
+      "expected": "investigate",
+      "got": "investigate",
+      "confidence": 0.72,
+      "inputTokens": 880,
+      "latencyMs": 302.79199999999764
+    },
+    {
+      "scenario": "s00041",
+      "variant": "projected",
+      "run": 2,
+      "expected": "investigate",
+      "got": "investigate",
+      "confidence": 1,
+      "inputTokens": 654,
+      "latencyMs": 393.8781659999986
+    },
+    {
+      "scenario": "s00044",
+      "variant": "raw",
+      "run": 1,
+      "expected": "investigate",
+      "got": "investigate",
+      "confidence": 0.8,
+      "inputTokens": 880,
+      "latencyMs": 319.70887500000026
+    },
+    {
+      "scenario": "s00044",
+      "variant": "raw",
+      "run": 2,
+      "expected": "investigate",
+      "got": "investigate",
+      "confidence": 0.79,
+      "inputTokens": 880,
+      "latencyMs": 326.59400000000096
+    },
+    {
+      "scenario": "s00044",
+      "variant": "projected",
+      "run": 0,
+      "expected": "investigate",
+      "got": "investigate",
+      "confidence": 1,
+      "inputTokens": 654,
+      "latencyMs": 365.4789589999964
+    },
+    {
+      "scenario": "s00044",
+      "variant": "projected",
+      "run": 1,
+      "expected": "investigate",
+      "got": "investigate",
+      "confidence": 1,
+      "inputTokens": 654,
+      "latencyMs": 308.4736249999987
+    },
+    {
+      "scenario": "s00072",
+      "variant": "raw",
+      "run": 0,
+      "expected": "investigate",
+      "got": "investigate",
+      "confidence": 0.61,
+      "inputTokens": 875,
+      "latencyMs": 302.9935000000005
+    },
+    {
+      "scenario": "s00044",
+      "variant": "projected",
+      "run": 2,
+      "expected": "investigate",
+      "got": "investigate",
+      "confidence": 1,
+      "inputTokens": 654,
+      "latencyMs": 325.08666599999924
+    },
+    {
+      "scenario": "s00072",
+      "variant": "raw",
+      "run": 1,
+      "expected": "investigate",
+      "got": "investigate",
+      "confidence": 0.85,
+      "inputTokens": 875,
+      "latencyMs": 320.1302079999987
+    },
+    {
+      "scenario": "s00108",
+      "variant": "raw",
+      "run": 0,
+      "expected": "investigate",
+      "got": "investigate",
+      "confidence": 0.95,
+      "inputTokens": 877,
+      "latencyMs": 337.3705000000009
+    },
+    {
+      "scenario": "s00072",
+      "variant": "projected",
+      "run": 2,
+      "expected": "investigate",
+      "got": "investigate",
+      "confidence": 1,
+      "inputTokens": 656,
+      "latencyMs": 379.0306249999994
+    },
+    {
+      "scenario": "s00072",
+      "variant": "projected",
+      "run": 1,
+      "expected": "investigate",
+      "got": "investigate",
+      "confidence": 1,
+      "inputTokens": 656,
+      "latencyMs": 485.3567920000023
+    },
+    {
+      "scenario": "s00072",
+      "variant": "projected",
+      "run": 0,
+      "expected": "investigate",
+      "got": "investigate",
+      "confidence": 1,
+      "inputTokens": 656,
+      "latencyMs": 586.2832080000007
+    },
+    {
+      "scenario": "s00072",
+      "variant": "raw",
+      "run": 2,
+      "expected": "investigate",
+      "got": "investigate",
+      "confidence": 0.73,
+      "inputTokens": 875,
+      "latencyMs": 670.1466660000006
+    },
+    {
+      "scenario": "s00108",
+      "variant": "raw",
+      "run": 1,
+      "expected": "investigate",
+      "got": "investigate",
+      "confidence": 0.94,
+      "inputTokens": 877,
+      "latencyMs": 347.705582999999
+    },
+    {
+      "scenario": "s00108",
+      "variant": "raw",
+      "run": 2,
+      "expected": "investigate",
+      "got": "investigate",
+      "confidence": 0.93,
+      "inputTokens": 877,
+      "latencyMs": 348.6248749999977
+    },
+    {
+      "scenario": "s00108",
+      "variant": "projected",
+      "run": 1,
+      "expected": "investigate",
+      "got": "investigate",
+      "confidence": 1,
+      "inputTokens": 654,
+      "latencyMs": 294.82491700000173
+    },
+    {
+      "scenario": "s00108",
+      "variant": "projected",
+      "run": 0,
+      "expected": "investigate",
+      "got": "investigate",
+      "confidence": 1,
+      "inputTokens": 654,
+      "latencyMs": 323.8919169999972
+    },
+    {
+      "scenario": "s00108",
+      "variant": "projected",
+      "run": 2,
+      "expected": "investigate",
+      "got": "investigate",
+      "confidence": 1,
+      "inputTokens": 654,
+      "latencyMs": 374.1042500000003
+    },
+    {
+      "scenario": "s00125",
+      "variant": "raw",
+      "run": 0,
+      "expected": "investigate",
+      "got": "investigate",
+      "confidence": 0.88,
+      "inputTokens": 878,
+      "latencyMs": 315.4727079999975
+    },
+    {
+      "scenario": "s00125",
+      "variant": "raw",
+      "run": 1,
+      "expected": "investigate",
+      "got": "investigate",
+      "confidence": 0.92,
+      "inputTokens": 878,
+      "latencyMs": 328.82583299999897
+    },
+    {
+      "scenario": "s00125",
+      "variant": "raw",
+      "run": 2,
+      "expected": "investigate",
+      "got": "investigate",
+      "confidence": 0.9,
+      "inputTokens": 878,
+      "latencyMs": 320.2039589999986
+    },
+    {
+      "scenario": "s00125",
+      "variant": "projected",
+      "run": 0,
+      "expected": "investigate",
+      "got": "investigate",
+      "confidence": 1,
+      "inputTokens": 654,
+      "latencyMs": 336.7227500000008
+    },
+    {
+      "scenario": "s00125",
+      "variant": "projected",
+      "run": 1,
+      "expected": "investigate",
+      "got": "investigate",
+      "confidence": 1,
+      "inputTokens": 654,
+      "latencyMs": 334.1559589999997
+    },
+    {
+      "scenario": "s00125",
+      "variant": "projected",
+      "run": 2,
+      "expected": "investigate",
+      "got": "investigate",
+      "confidence": 1,
+      "inputTokens": 654,
+      "latencyMs": 334.17920799999774
+    },
+    {
+      "scenario": "s00128",
+      "variant": "raw",
+      "run": 0,
+      "expected": "investigate",
+      "got": "investigate",
+      "confidence": 0.91,
+      "inputTokens": 880,
+      "latencyMs": 393.10041600000113
+    },
+    {
+      "scenario": "s00128",
+      "variant": "raw",
+      "run": 1,
+      "expected": "investigate",
+      "got": "investigate",
+      "confidence": 0.91,
+      "inputTokens": 880,
+      "latencyMs": 351.1865829999988
+    },
+    {
+      "scenario": "s00128",
+      "variant": "raw",
+      "run": 2,
+      "expected": "investigate",
+      "got": "investigate",
+      "confidence": 0.89,
+      "inputTokens": 880,
+      "latencyMs": 322.73399999999674
+    },
+    {
+      "scenario": "s00128",
+      "variant": "projected",
+      "run": 0,
+      "expected": "investigate",
+      "got": "investigate",
+      "confidence": 1,
+      "inputTokens": 654,
+      "latencyMs": 376.4432080000006
+    },
+    {
+      "scenario": "s00128",
+      "variant": "projected",
+      "run": 1,
+      "expected": "investigate",
+      "got": "investigate",
+      "confidence": 1,
+      "inputTokens": 654,
+      "latencyMs": 376.14287500000137
+    },
+    {
+      "scenario": "s00202",
+      "variant": "raw",
+      "run": 0,
+      "expected": "investigate",
+      "got": "investigate",
+      "confidence": 0.79,
+      "inputTokens": 881,
+      "latencyMs": 306.9748330000002
+    },
+    {
+      "scenario": "s00128",
+      "variant": "projected",
+      "run": 2,
+      "expected": "investigate",
+      "got": "investigate",
+      "confidence": 1,
+      "inputTokens": 654,
+      "latencyMs": 351.24508400000195
+    },
+    {
+      "scenario": "s00202",
+      "variant": "raw",
+      "run": 1,
+      "expected": "investigate",
+      "got": "investigate",
+      "confidence": 0.82,
+      "inputTokens": 881,
+      "latencyMs": 372.2018750000025
+    },
+    {
+      "scenario": "s00202",
+      "variant": "raw",
+      "run": 2,
+      "expected": "investigate",
+      "got": "investigate",
+      "confidence": 0.78,
+      "inputTokens": 881,
+      "latencyMs": 326.9438330000012
+    },
+    {
+      "scenario": "s00202",
+      "variant": "projected",
+      "run": 1,
+      "expected": "investigate",
+      "got": "investigate",
+      "confidence": 1,
+      "inputTokens": 654,
+      "latencyMs": 317.8543750000026
+    },
+    {
+      "scenario": "s00202",
+      "variant": "projected",
+      "run": 0,
+      "expected": "investigate",
+      "got": "investigate",
+      "confidence": 1,
+      "inputTokens": 654,
+      "latencyMs": 360.3353329999991
+    },
+    {
+      "scenario": "s00202",
+      "variant": "projected",
+      "run": 2,
+      "expected": "investigate",
+      "got": "investigate",
+      "confidence": 1,
+      "inputTokens": 654,
+      "latencyMs": 351.99320799999987
+    },
+    {
+      "scenario": "s00203",
+      "variant": "raw",
+      "run": 0,
+      "expected": "investigate",
+      "got": "heal",
+      "confidence": 0.43,
+      "inputTokens": 879,
+      "latencyMs": 353.6365829999995
+    },
+    {
+      "scenario": "s00203",
+      "variant": "raw",
+      "run": 1,
+      "expected": "investigate",
+      "got": "heal",
+      "confidence": 0.48,
+      "inputTokens": 879,
+      "latencyMs": 335.06216700000004
+    },
+    {
+      "scenario": "s00203",
+      "variant": "raw",
+      "run": 2,
+      "expected": "investigate",
+      "got": "heal",
+      "confidence": 0.52,
+      "inputTokens": 879,
+      "latencyMs": 319.9732499999991
+    },
+    {
+      "scenario": "s00203",
+      "variant": "projected",
+      "run": 0,
+      "expected": "investigate",
+      "got": "investigate",
+      "confidence": 1,
+      "inputTokens": 655,
+      "latencyMs": 353.50145899999916
+    },
+    {
+      "scenario": "s00203",
+      "variant": "projected",
+      "run": 1,
+      "expected": "investigate",
+      "got": "investigate",
+      "confidence": 1,
+      "inputTokens": 655,
+      "latencyMs": 340.0438329999997
+    },
+    {
+      "scenario": "s00203",
+      "variant": "projected",
+      "run": 2,
+      "expected": "investigate",
+      "got": "investigate",
+      "confidence": 1,
+      "inputTokens": 655,
+      "latencyMs": 309.95458300000246
+    },
+    {
+      "scenario": "s00222",
+      "variant": "raw",
+      "run": 0,
+      "expected": "investigate",
+      "got": "investigate",
+      "confidence": 0.95,
+      "inputTokens": 881,
+      "latencyMs": 336.6076670000002
+    },
+    {
+      "scenario": "s00222",
+      "variant": "raw",
+      "run": 1,
+      "expected": "investigate",
+      "got": "investigate",
+      "confidence": 0.94,
+      "inputTokens": 881,
+      "latencyMs": 305.1912080000002
+    },
+    {
+      "scenario": "s00222",
+      "variant": "raw",
+      "run": 2,
+      "expected": "investigate",
+      "got": "investigate",
+      "confidence": 0.94,
+      "inputTokens": 881,
+      "latencyMs": 300.2639170000002
+    },
+    {
+      "scenario": "s00222",
+      "variant": "projected",
+      "run": 0,
+      "expected": "investigate",
+      "got": "investigate",
+      "confidence": 1,
+      "inputTokens": 655,
+      "latencyMs": 337.33350000000064
+    },
+    {
+      "scenario": "s00222",
+      "variant": "projected",
+      "run": 1,
+      "expected": "investigate",
+      "got": "investigate",
+      "confidence": 1,
+      "inputTokens": 655,
+      "latencyMs": 377.9607920000017
+    },
+    {
+      "scenario": "s00222",
+      "variant": "projected",
+      "run": 2,
+      "expected": "investigate",
+      "got": "investigate",
+      "confidence": 1,
+      "inputTokens": 655,
+      "latencyMs": 333.00445799999943
+    },
+    {
+      "scenario": "s00002",
+      "variant": "raw",
+      "run": 0,
+      "expected": "patrol",
+      "got": "patrol",
+      "confidence": 1,
+      "inputTokens": 868,
+      "latencyMs": 330.68945899999744
+    },
+    {
+      "scenario": "s00002",
+      "variant": "raw",
+      "run": 1,
+      "expected": "patrol",
+      "got": "patrol",
+      "confidence": 1,
+      "inputTokens": 868,
+      "latencyMs": 346.54820800000016
+    },
+    {
+      "scenario": "s00002",
+      "variant": "raw",
+      "run": 2,
+      "expected": "patrol",
+      "got": "patrol",
+      "confidence": 1,
+      "inputTokens": 868,
+      "latencyMs": 336.1672499999986
+    },
+    {
+      "scenario": "s00002",
+      "variant": "projected",
+      "run": 0,
+      "expected": "patrol",
+      "got": "patrol",
+      "confidence": 1,
+      "inputTokens": 639,
+      "latencyMs": 338.46283400000175
+    },
+    {
+      "scenario": "s00002",
+      "variant": "projected",
+      "run": 1,
+      "expected": "patrol",
+      "got": "patrol",
+      "confidence": 1,
+      "inputTokens": 639,
+      "latencyMs": 328.29341600000043
+    },
+    {
+      "scenario": "s00002",
+      "variant": "projected",
+      "run": 2,
+      "expected": "patrol",
+      "got": "patrol",
+      "confidence": 1,
+      "inputTokens": 639,
+      "latencyMs": 373.91754199999923
+    },
+    {
+      "scenario": "s00007",
+      "variant": "raw",
+      "run": 0,
+      "expected": "patrol",
+      "got": "investigate",
+      "confidence": 0.4,
+      "inputTokens": 879,
+      "latencyMs": 320.8526669999992
+    },
+    {
+      "scenario": "s00007",
+      "variant": "raw",
+      "run": 1,
+      "expected": "patrol",
+      "got": "investigate",
+      "confidence": 0.4,
+      "inputTokens": 879,
+      "latencyMs": 375.4492910000008
+    },
+    {
+      "scenario": "s00007",
+      "variant": "projected",
+      "run": 0,
+      "expected": "patrol",
+      "got": "patrol",
+      "confidence": 0.6,
+      "inputTokens": 655,
+      "latencyMs": 336.692750000002
+    },
+    {
+      "scenario": "s00007",
+      "variant": "raw",
+      "run": 2,
+      "expected": "patrol",
+      "got": "patrol",
+      "confidence": 0.38,
+      "inputTokens": 879,
+      "latencyMs": 449.088832999998
+    },
+    {
+      "scenario": "s00007",
+      "variant": "projected",
+      "run": 2,
+      "expected": "patrol",
+      "got": "patrol",
+      "confidence": 0.85,
+      "inputTokens": 655,
+      "latencyMs": 361.499834000002
+    },
+    {
+      "scenario": "s00007",
+      "variant": "projected",
+      "run": 1,
+      "expected": "patrol",
+      "got": "patrol",
+      "confidence": 0.69,
+      "inputTokens": 655,
+      "latencyMs": 392.7953749999979
+    },
+    {
+      "scenario": "s00038",
+      "variant": "raw",
+      "run": 0,
+      "expected": "patrol",
+      "got": "investigate",
+      "confidence": 0.71,
+      "inputTokens": 878,
+      "latencyMs": 317.43824999999924
+    },
+    {
+      "scenario": "s00038",
+      "variant": "raw",
+      "run": 1,
+      "expected": "patrol",
+      "got": "investigate",
+      "confidence": 0.64,
+      "inputTokens": 878,
+      "latencyMs": 364.4856660000005
+    },
+    {
+      "scenario": "s00038",
+      "variant": "raw",
+      "run": 2,
+      "expected": "patrol",
+      "got": "investigate",
+      "confidence": 0.74,
+      "inputTokens": 878,
+      "latencyMs": 350.9639169999973
+    },
+    {
+      "scenario": "s00038",
+      "variant": "projected",
+      "run": 0,
+      "expected": "patrol",
+      "got": "patrol",
+      "confidence": 0.85,
+      "inputTokens": 654,
+      "latencyMs": 372.8789590000015
+    },
+    {
+      "scenario": "s00038",
+      "variant": "projected",
+      "run": 2,
+      "expected": "patrol",
+      "got": "patrol",
+      "confidence": 0.88,
+      "inputTokens": 654,
+      "latencyMs": 319.1589160000003
+    },
+    {
+      "scenario": "s00038",
+      "variant": "projected",
+      "run": 1,
+      "expected": "patrol",
+      "got": "patrol",
+      "confidence": 0.93,
+      "inputTokens": 654,
+      "latencyMs": 398.12975000000006
+    },
+    {
+      "scenario": "s00061",
+      "variant": "raw",
+      "run": 0,
+      "expected": "patrol",
+      "got": "investigate",
+      "confidence": 0.62,
+      "inputTokens": 878,
+      "latencyMs": 314.7848330000015
+    },
+    {
+      "scenario": "s00061",
+      "variant": "raw",
+      "run": 1,
+      "expected": "patrol",
+      "got": "investigate",
+      "confidence": 0.56,
+      "inputTokens": 878,
+      "latencyMs": 341.04933300000266
+    },
+    {
+      "scenario": "s00061",
+      "variant": "projected",
+      "run": 0,
+      "expected": "patrol",
+      "got": "patrol",
+      "confidence": 0.93,
+      "inputTokens": 654,
+      "latencyMs": 304.231832999998
+    },
+    {
+      "scenario": "s00061",
+      "variant": "projected",
+      "run": 1,
+      "expected": "patrol",
+      "got": "patrol",
+      "confidence": 0.88,
+      "inputTokens": 654,
+      "latencyMs": 307.8152500000033
+    },
+    {
+      "scenario": "s00061",
+      "variant": "raw",
+      "run": 2,
+      "expected": "patrol",
+      "got": "investigate",
+      "confidence": 0.56,
+      "inputTokens": 878,
+      "latencyMs": 356.03908299999966
+    },
+    {
+      "scenario": "s00061",
+      "variant": "projected",
+      "run": 2,
+      "expected": "patrol",
+      "got": "patrol",
+      "confidence": 0.92,
+      "inputTokens": 654,
+      "latencyMs": 324.1440829999992
+    },
+    {
+      "scenario": "s00069",
+      "variant": "raw",
+      "run": 0,
+      "expected": "patrol",
+      "got": "heal",
+      "confidence": 0.46,
+      "inputTokens": 875,
+      "latencyMs": 314.9067499999983
+    },
+    {
+      "scenario": "s00069",
+      "variant": "projected",
+      "run": 0,
+      "expected": "patrol",
+      "got": "patrol",
+      "confidence": 0.81,
+      "inputTokens": 655,
+      "latencyMs": 304.843832999999
+    },
+    {
+      "scenario": "s00069",
+      "variant": "raw",
+      "run": 1,
+      "expected": "patrol",
+      "got": "heal",
+      "confidence": 0.54,
+      "inputTokens": 875,
+      "latencyMs": 357.68624999999884
+    },
+    {
+      "scenario": "s00069",
+      "variant": "raw",
+      "run": 2,
+      "expected": "patrol",
+      "got": "heal",
+      "confidence": 0.51,
+      "inputTokens": 875,
+      "latencyMs": 343.40270800000144
+    },
+    {
+      "scenario": "s00069",
+      "variant": "projected",
+      "run": 1,
+      "expected": "patrol",
+      "got": "patrol",
+      "confidence": 0.8,
+      "inputTokens": 655,
+      "latencyMs": 364.2618330000005
+    },
+    {
+      "scenario": "s00069",
+      "variant": "projected",
+      "run": 2,
+      "expected": "patrol",
+      "got": "patrol",
+      "confidence": 0.8,
+      "inputTokens": 655,
+      "latencyMs": 334.8486669999984
+    },
+    {
+      "scenario": "s00070",
+      "variant": "raw",
+      "run": 0,
+      "expected": "patrol",
+      "got": "investigate",
+      "confidence": 0.81,
+      "inputTokens": 877,
+      "latencyMs": 330.1292910000011
+    },
+    {
+      "scenario": "s00070",
+      "variant": "raw",
+      "run": 2,
+      "expected": "patrol",
+      "got": "investigate",
+      "confidence": 0.73,
+      "inputTokens": 877,
+      "latencyMs": 364.2727080000004
+    },
+    {
+      "scenario": "s00070",
+      "variant": "raw",
+      "run": 1,
+      "expected": "patrol",
+      "got": "investigate",
+      "confidence": 0.85,
+      "inputTokens": 877,
+      "latencyMs": 377.0532089999979
+    },
+    {
+      "scenario": "s00070",
+      "variant": "projected",
+      "run": 1,
+      "expected": "patrol",
+      "got": "patrol",
+      "confidence": 0.88,
+      "inputTokens": 654,
+      "latencyMs": 306.3860829999976
+    },
+    {
+      "scenario": "s00070",
+      "variant": "projected",
+      "run": 0,
+      "expected": "patrol",
+      "got": "patrol",
+      "confidence": 0.75,
+      "inputTokens": 654,
+      "latencyMs": 382.4525420000027
+    },
+    {
+      "scenario": "s00070",
+      "variant": "projected",
+      "run": 2,
+      "expected": "patrol",
+      "got": "patrol",
+      "confidence": 0.89,
+      "inputTokens": 654,
+      "latencyMs": 338.4216250000027
+    },
+    {
+      "scenario": "s00073",
+      "variant": "raw",
+      "run": 1,
+      "expected": "patrol",
+      "got": "patrol",
+      "confidence": 0.89,
+      "inputTokens": 871,
+      "latencyMs": 307.28879099999904
+    },
+    {
+      "scenario": "s00073",
+      "variant": "raw",
+      "run": 0,
+      "expected": "patrol",
+      "got": "patrol",
+      "confidence": 0.9,
+      "inputTokens": 871,
+      "latencyMs": 322.6269590000011
+    },
+    {
+      "scenario": "s00073",
+      "variant": "raw",
+      "run": 2,
+      "expected": "patrol",
+      "got": "patrol",
+      "confidence": 0.89,
+      "inputTokens": 871,
+      "latencyMs": 321.08820800000103
+    },
+    {
+      "scenario": "s00073",
+      "variant": "projected",
+      "run": 0,
+      "expected": "patrol",
+      "got": "patrol",
+      "confidence": 1,
+      "inputTokens": 639,
+      "latencyMs": 344.9862919999978
+    },
+    {
+      "scenario": "s00073",
+      "variant": "projected",
+      "run": 2,
+      "expected": "patrol",
+      "got": "patrol",
+      "confidence": 1,
+      "inputTokens": 639,
+      "latencyMs": 312.96454200000153
+    },
+    {
+      "scenario": "s00073",
+      "variant": "projected",
+      "run": 1,
+      "expected": "patrol",
+      "got": "patrol",
+      "confidence": 1,
+      "inputTokens": 639,
+      "latencyMs": 353.6114170000001
+    },
+    {
+      "scenario": "s00093",
+      "variant": "raw",
+      "run": 0,
+      "expected": "patrol",
+      "got": "heal",
+      "confidence": 0.87,
+      "inputTokens": 876,
+      "latencyMs": 324.182499999999
+    },
+    {
+      "scenario": "s00093",
+      "variant": "raw",
+      "run": 1,
+      "expected": "patrol",
+      "got": "heal",
+      "confidence": 0.83,
+      "inputTokens": 876,
+      "latencyMs": 304.6322919999984
+    },
+    {
+      "scenario": "s00093",
+      "variant": "raw",
+      "run": 2,
+      "expected": "patrol",
+      "got": "heal",
+      "confidence": 0.89,
+      "inputTokens": 876,
+      "latencyMs": 363.1095830000013
+    },
+    {
+      "scenario": "s00093",
+      "variant": "projected",
+      "run": 0,
+      "expected": "patrol",
+      "got": "patrol",
+      "confidence": 0.83,
+      "inputTokens": 655,
+      "latencyMs": 318.42537500000253
+    },
+    {
+      "scenario": "s00093",
+      "variant": "projected",
+      "run": 1,
+      "expected": "patrol",
+      "got": "patrol",
+      "confidence": 0.79,
+      "inputTokens": 655,
+      "latencyMs": 327.75929200000246
+    },
+    {
+      "scenario": "s00093",
+      "variant": "projected",
+      "run": 2,
+      "expected": "patrol",
+      "got": "patrol",
+      "confidence": 0.84,
+      "inputTokens": 655,
+      "latencyMs": 389.8734169999989
+    },
+    {
+      "scenario": "s00098",
+      "variant": "raw",
+      "run": 0,
+      "expected": "patrol",
+      "got": "patrol",
+      "confidence": 0.59,
+      "inputTokens": 876,
+      "latencyMs": 327.3238339999989
+    },
+    {
+      "scenario": "s00098",
+      "variant": "raw",
+      "run": 1,
+      "expected": "patrol",
+      "got": "patrol",
+      "confidence": 0.58,
+      "inputTokens": 876,
+      "latencyMs": 332.15295799999876
+    },
+    {
+      "scenario": "s00098",
+      "variant": "raw",
+      "run": 2,
+      "expected": "patrol",
+      "got": "patrol",
+      "confidence": 0.62,
+      "inputTokens": 876,
+      "latencyMs": 342.0764999999992
+    },
+    {
+      "scenario": "s00098",
+      "variant": "projected",
+      "run": 0,
+      "expected": "patrol",
+      "got": "patrol",
+      "confidence": 0.88,
+      "inputTokens": 654,
+      "latencyMs": 340.0874169999988
+    },
+    {
+      "scenario": "s00098",
+      "variant": "projected",
+      "run": 1,
+      "expected": "patrol",
+      "got": "patrol",
+      "confidence": 0.92,
+      "inputTokens": 654,
+      "latencyMs": 320.81004100000064
+    },
+    {
+      "scenario": "s00098",
+      "variant": "projected",
+      "run": 2,
+      "expected": "patrol",
+      "got": "patrol",
+      "confidence": 0.92,
+      "inputTokens": 654,
+      "latencyMs": 327.25879200000054
+    },
+    {
+      "scenario": "s00099",
+      "variant": "raw",
+      "run": 0,
+      "expected": "patrol",
+      "got": "patrol",
+      "confidence": 0.83,
+      "inputTokens": 865,
+      "latencyMs": 322.20929199999955
+    },
+    {
+      "scenario": "s00099",
+      "variant": "raw",
+      "run": 2,
+      "expected": "patrol",
+      "got": "patrol",
+      "confidence": 0.88,
+      "inputTokens": 865,
+      "latencyMs": 331.83200000000215
+    },
+    {
+      "scenario": "s00099",
+      "variant": "raw",
+      "run": 1,
+      "expected": "patrol",
+      "got": "patrol",
+      "confidence": 0.86,
+      "inputTokens": 865,
+      "latencyMs": 378.1779580000002
+    },
+    {
+      "scenario": "s00099",
+      "variant": "projected",
+      "run": 0,
+      "expected": "patrol",
+      "got": "patrol",
+      "confidence": 1,
+      "inputTokens": 641,
+      "latencyMs": 314.1880830000009
+    },
+    {
+      "scenario": "s00099",
+      "variant": "projected",
+      "run": 1,
+      "expected": "patrol",
+      "got": "patrol",
+      "confidence": 1,
+      "inputTokens": 641,
+      "latencyMs": 388.11154199999874
+    },
+    {
+      "scenario": "s00099",
+      "variant": "projected",
+      "run": 2,
+      "expected": "patrol",
+      "got": "patrol",
+      "confidence": 1,
+      "inputTokens": 641,
+      "latencyMs": 345.591333999997
+    }
+  ]
+}
