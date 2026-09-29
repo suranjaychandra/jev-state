@@ -1,5 +1,8 @@
 # jev-state
 
+[![CI](https://github.com/suranjaychandra/jev-state/actions/workflows/ci.yml/badge.svg)](https://github.com/suranjaychandra/jev-state/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
 Turn raw app and game state into state that [Jev](https://typesafe.ai) reads well.
 
 Jev, TypeSafe AI's System One model, is fast and cheap, and its answers always match the types you ask for. It also has documented weak spots:
@@ -49,7 +52,7 @@ The library never calls the API and has no runtime dependencies. Pass `state` to
 npm install jev-state
 ```
 
-Node.js 20+. Ships ESM, CommonJS, and TypeScript types.
+Node.js 22+. Ships ESM, CommonJS, and TypeScript types.
 
 ## `project(raw, schema, options?)`
 
