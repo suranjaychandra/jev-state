@@ -162,6 +162,10 @@ npm run example   # one NPC decision; calls Jev if TYPESAFE_API_KEY is set
 npm run compare   # one situation sent as raw state and as jev-state; edit the numbers in examples/compare.ts
 ```
 
+## Contributing
+
+Issues and pull requests are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for setup, guidelines, and roadmap ideas.
+
 ## License
 
 [MIT](LICENSE) © 2026 Suranjay Kumar
