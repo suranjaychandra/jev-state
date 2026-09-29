@@ -54,6 +54,19 @@ npm install jev-state
 
 Node.js 22+. Ships ESM, CommonJS, and TypeScript types.
 
+## Try it: Playground
+
+[`playground/`](playground) is a local web app that asks Jev the same question twice, side by side: once with raw state, once through jev-state. It covers game NPC decisions and support-ticket priority. Set the numbers yourself and watch the answers, confidence, and tokens change.
+
+```sh
+cd playground
+npm install
+cp .env.example .env    # add your TYPESAFE_API_KEY
+npm start               # http://localhost:3000
+```
+
+Your key stays in the local server. See [`playground/README.md`](playground/README.md) for details.
+
 ## `project(raw, schema, options?)`
 
 Returns `{ state, meta }`. `meta.changed` and `meta.dropped` list the paths that were rewritten or removed.

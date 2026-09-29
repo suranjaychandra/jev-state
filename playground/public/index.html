@@ -1,0 +1,616 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>jev-state Playground</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=VT323&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --pink: #f386a1;
+    --pink-soft: #f9c3d1;
+    --ink: #1e1e1e;
+    --paper: #fefefe;
+    --grey: #dedede;
+    --grey-2: #c4c4c4;
+    --grey-3: #8a8a8a;
+    --good: #1f7a3a;
+    --bad: #c2283d;
+    --grotesk: "Space Grotesk", "Helvetica Neue", Arial, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+    --pixel: "VT323", "IBM Plex Mono", monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body { background: var(--paper); color: var(--ink); font-family: var(--mono); font-size: 14px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; }
+  code { font-family: var(--mono); font-size: .92em; background: var(--grey); padding: 0 4px; }
+
+  /* ---------- Windows ---------- */
+  .win { background: var(--paper); border: 1.5px solid var(--ink); box-shadow: 4px 4px 0 var(--ink); }
+  .win-bar {
+    display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    background: var(--ink); color: var(--paper); font: 20px/1 var(--pixel); padding: 4px 8px 3px; letter-spacing: .02em;
+  }
+  .win-bar .boxes { display: flex; gap: 4px; }
+  .win-bar .boxes i { width: 11px; height: 11px; border: 1.5px solid var(--paper); display: block; }
+  .win-bar .tag { font-size: 17px; opacity: .75; }
+  .win-body { padding: 14px; }
+
+  /* ---------- Top nav ---------- */
+  .nav { position: absolute; top: 0; left: 0; right: 0; display: flex; justify-content: space-between; z-index: 5; font-family: var(--grotesk); font-size: 15px; }
+  .nav-group { display: flex; }
+  .nav a, .nav span.item { background: var(--paper); padding: 6px 12px; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; }
+  .nav a:hover { background: var(--ink); color: var(--paper); }
+  .nav .brand { font-weight: 600; }
+  .nav .dark { background: var(--ink); color: var(--paper); }
+  .dot { width: 8px; height: 8px; background: var(--good); display: inline-block; }
+  .dot.mock { background: var(--bad); }
+
+  /* ---------- Hero ---------- */
+  .hero { position: relative; overflow: hidden; padding: 86px 24px 36px; text-align: center; }
+  .clouds {
+    position: absolute; inset: 0 0 auto 0; height: 380px; pointer-events: none;
+    background:
+      radial-gradient(420px 220px at 12% 18%, rgba(236, 120, 230, .85), transparent 70%),
+      radial-gradient(380px 240px at 88% 12%, rgba(240, 110, 210, .85), transparent 70%),
+      radial-gradient(300px 180px at 30% 60%, rgba(248, 170, 230, .7), transparent 70%),
+      radial-gradient(340px 200px at 75% 55%, rgba(246, 160, 225, .7), transparent 70%),
+      linear-gradient(180deg, #dfe9ff 0%, #efe4ff 45%, var(--paper) 100%);
+    -webkit-mask-image: linear-gradient(180deg, #000 60%, transparent);
+            mask-image: linear-gradient(180deg, #000 60%, transparent);
+  }
+  .clouds::after {
+    content: ""; position: absolute; inset: 0; opacity: .35;
+    background-image: radial-gradient(rgba(30, 30, 30, .35) .6px, transparent .9px); background-size: 3px 3px;
+  }
+  .hero-inner { position: relative; max-width: 1100px; margin: 0 auto; }
+  .news { display: inline-block; text-align: left; min-width: 300px; margin-bottom: 26px; }
+  .news .win-bar { font-size: 17px; }
+  .news .win-body { text-align: center; font-size: 13px; padding: 10px 14px; background: var(--grey); }
+  .news b { font-weight: 600; }
+  .intro-line { font-family: var(--grotesk); font-size: 15px; margin-bottom: 18px; }
+  .intro-line span { letter-spacing: .3em; color: var(--grey-3); }
+  h1 { font-family: var(--grotesk); font-weight: 600; font-size: clamp(40px, 6.2vw, 92px); line-height: 1.06; letter-spacing: -0.045em; margin: 0 0 22px; }
+  h1 .hl { background: linear-gradient(transparent 14%, var(--pink) 14%); padding: 0 .12em; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+  .lede { max-width: 760px; margin: 0 auto; font-family: var(--grotesk); font-size: 19px; line-height: 1.45; color: #3a3a3a; }
+  .lede b { color: var(--ink); font-weight: 600; }
+
+  .mock-banner { display: none; max-width: 1240px; margin: 0 auto 18px; }
+  .mock-banner .win-body { background: var(--ink); color: var(--pink); font-size: 13px; }
+  body.is-mock .mock-banner { display: block; }
+
+  /* ---------- Pink app area ---------- */
+  .stage {
+    background-color: var(--pink);
+    background-image: radial-gradient(rgba(30, 30, 30, .22) 1px, transparent 1.3px);
+    background-size: 7px 7px;
+    border-top: 1.5px solid var(--ink); border-bottom: 1.5px solid var(--ink);
+    padding: 34px 24px 44px;
+  }
+  .grid { max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: 340px 1fr; gap: 26px; align-items: start; }
+  @media (max-width: 980px) { .grid { grid-template-columns: 1fr; } }
+  .controls { position: sticky; top: 16px; }
+  @media (max-width: 980px) { .controls { position: static; } }
+
+  .tabs { display: grid; grid-template-columns: 1fr 1fr; border: 1.5px solid var(--ink); }
+  .tab { appearance: none; border: 0; background: var(--paper); color: var(--ink); font: 500 13px var(--mono); padding: 8px; cursor: pointer; }
+  .tab + .tab { border-left: 1.5px solid var(--ink); }
+  .tab.active { background: var(--ink); color: var(--paper); }
+  .section-label { font: 18px/1 var(--pixel); margin: 16px 0 8px; }
+  .presets { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip { appearance: none; border: 1.5px solid var(--ink); background: var(--paper); color: var(--ink); font: 500 12px var(--mono); padding: 4px 8px; cursor: pointer; }
+  .chip:hover { background: var(--pink); }
+  .chip:active { transform: translate(1px, 1px); }
+
+  .field { margin-top: 14px; }
+  .field-top { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; gap: 8px; }
+  .field-top label { font-size: 13px; font-weight: 500; }
+  .field-top .val { font: 20px/1 var(--pixel); background: var(--ink); color: var(--paper); padding: 1px 6px 0; }
+  .hint { font-size: 11.5px; color: var(--grey-3); margin-top: 4px; }
+  input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; height: 12px; background: transparent; outline: none;
+    background-image: linear-gradient(var(--ink), var(--ink)); background-size: 100% 2px; background-position: center; background-repeat: no-repeat; }
+  input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 14px; height: 18px; background: var(--paper); border: 1.5px solid var(--ink); box-shadow: 2px 2px 0 var(--ink); cursor: pointer; }
+  input[type=range]::-moz-range-thumb { width: 12px; height: 16px; background: var(--paper); border: 1.5px solid var(--ink); border-radius: 0; }
+  input[type=number], input[type=text] { width: 100%; background: var(--paper); border: 1.5px solid var(--ink); color: var(--ink); font: 500 13px var(--mono); padding: 6px 8px; border-radius: 0; outline: none; }
+  input:focus { background: #fff3f6; }
+  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .enemies { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; min-height: 28px; align-items: center; }
+  .enemy { display: inline-flex; align-items: center; gap: 4px; font: 500 12px var(--mono); padding: 2px 4px 2px 8px; border: 1.5px solid var(--ink); background: var(--grey); }
+  .enemy.near { background: var(--pink); }
+  .enemy button { appearance: none; border: 0; background: transparent; cursor: pointer; font: 600 14px var(--mono); line-height: 1; padding: 0 2px; }
+  .none { color: var(--grey-3); font-size: 12.5px; }
+  .add-row { display: flex; gap: 6px; }
+  .add-row button { appearance: none; border: 1.5px solid var(--ink); background: var(--paper); font: 600 12px var(--mono); padding: 0 12px; cursor: pointer; }
+  .add-row button:hover { background: var(--ink); color: var(--paper); }
+  .switch { display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 13px; user-select: none; }
+  .switch input { display: none; }
+  .track { width: 36px; height: 18px; border: 1.5px solid var(--ink); position: relative; background: var(--paper); }
+  .track::after { content: ""; position: absolute; top: 2px; left: 2px; width: 11px; height: 11px; background: var(--ink); transition: transform .12s; }
+  .switch input:checked + .track { background: var(--pink); }
+  .switch input:checked + .track::after { transform: translateX(18px); }
+
+  .ask {
+    margin-top: 18px; width: 100%; appearance: none; cursor: pointer; border: 1.5px solid var(--ink); background: var(--ink); color: var(--paper);
+    font: 24px/1 var(--pixel); letter-spacing: .04em; padding: 12px; display: flex; align-items: center; justify-content: center; gap: 12px;
+    box-shadow: 4px 4px 0 var(--pink-soft);
+  }
+  .ask:hover { background: var(--paper); color: var(--ink); box-shadow: 4px 4px 0 var(--ink); }
+  .ask:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--ink); }
+  .ask[disabled] { cursor: progress; background: var(--grey-3); }
+  .kbd { font: 12px var(--mono); border: 1px solid currentColor; padding: 0 5px; opacity: .7; }
+  .spinner { display: none; font-family: var(--pixel); }
+  .ask[disabled] .spinner { display: inline; animation: blink .6s steps(2) infinite; }
+  .ask[disabled] .kbd { display: none; }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  details.rules { margin-top: 16px; border-top: 1.5px dashed var(--ink); padding-top: 10px; }
+  details.rules summary { cursor: pointer; font-size: 12.5px; list-style: none; }
+  details.rules summary::before { content: "[+] "; }
+  details.rules[open] summary::before { content: "[-] "; }
+  details.rules pre { white-space: pre-wrap; font: 11.5px/1.55 var(--mono); background: var(--grey); border: 1.5px solid var(--ink); padding: 10px; margin: 10px 0 0; }
+  .error { display: none; margin-top: 12px; padding: 8px 10px; border: 1.5px solid var(--bad); background: #ffe8ec; color: var(--bad); font-size: 12.5px; }
+
+  /* ---------- Results ---------- */
+  .verdict .win-body { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+  .verdict .k { font: 18px/1 var(--pixel); color: var(--grey-3); }
+  .verdict .v { font: 600 40px/1 var(--grotesk); letter-spacing: -0.03em; margin-top: 4px; }
+  .verdict .why { font-size: 12.5px; max-width: 520px; color: #3a3a3a; }
+  .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 22px; }
+  @media (max-width: 760px) { .compare { grid-template-columns: 1fr; } }
+  .side .win-body { display: flex; flex-direction: column; gap: 12px; }
+  .side-sub { font-size: 12.5px; color: var(--grey-3); margin-top: -4px; }
+  .side.js .win-bar { background: var(--ink); }
+  .side.js .win-bar .tag { background: var(--pink); color: var(--ink); opacity: 1; padding: 0 6px; }
+
+  .decision { border: 1.5px solid var(--ink); padding: 12px; min-height: 136px; background: var(--paper); }
+  .decision .k { font: 18px/1 var(--pixel); color: var(--grey-3); }
+  .answer-line { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin: 4px 0 10px; }
+  .answer { font: 600 38px/1.05 var(--grotesk); letter-spacing: -0.035em; }
+  .mark { font: 20px/1 var(--pixel); padding: 4px 8px 2px; border: 1.5px solid var(--ink); }
+  .mark.ok { background: var(--good); color: var(--paper); }
+  .mark.no { background: var(--bad); color: var(--paper); }
+  .conf { display: flex; align-items: center; gap: 10px; font-size: 12.5px; }
+  .bar { flex: 1; height: 12px; border: 1.5px solid var(--ink); background: var(--paper); }
+  .bar > i { display: block; height: 100%; width: 0; background: repeating-linear-gradient(90deg, var(--ink) 0 4px, transparent 4px 6px); transition: width .6s steps(12); }
+  .side.js .bar > i { background: var(--pink); border-right: 1.5px solid var(--ink); }
+  .placeholder { color: var(--grey-3); font-size: 13px; display: grid; place-items: center; min-height: 106px; text-align: center; }
+  .placeholder b { color: var(--ink); }
+  .stale { opacity: .4; }
+
+  .probs { display: grid; gap: 5px; }
+  .prob { display: grid; grid-template-columns: 100px 1fr 40px; align-items: center; gap: 8px; font-size: 12px; color: #555; }
+  .prob .name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .prob.chosen { color: var(--ink); font-weight: 600; }
+  .prob .mini { height: 8px; background: var(--grey); }
+  .prob .mini > i { display: block; height: 100%; width: 0; background: var(--grey-3); transition: width .6s steps(12); }
+  .prob.chosen .mini > i { background: var(--ink); }
+  .side.js .prob.chosen .mini > i { background: var(--pink); outline: 1.5px solid var(--ink); }
+  .prob .p { text-align: right; }
+  .correct-tag { color: var(--good); margin-left: 4px; font-weight: 700; }
+
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); border: 1.5px solid var(--ink); }
+  .stat { padding: 6px 10px; }
+  .stat + .stat { border-left: 1.5px solid var(--ink); }
+  .stat .k { font: 17px/1 var(--pixel); color: var(--grey-3); }
+  .stat .v { font: 600 18px var(--grotesk); }
+  .code-label { display: flex; justify-content: space-between; gap: 12px; font-size: 11.5px; }
+  .code-label span:first-child { font: 18px/1 var(--pixel); white-space: nowrap; }
+  .code-label span:last-child { color: var(--grey-3); text-align: right; }
+  pre.code { margin: 0; font: 12px/1.6 var(--mono); background: #f4f4f4; border: 1.5px solid var(--ink); padding: 10px 12px; max-height: 300px; overflow: auto; white-space: pre-wrap; word-break: break-all; color: #6b6b6b; }
+  .j-key { color: var(--ink); font-weight: 600; } .j-str { color: #a3245a; } .j-num { color: #1d4fb8; } .j-lit { color: #7a3fb0; }
+  .side.raw pre.code .j-key { font-weight: 500; color: #555; }
+  .side.js pre.code { background: #fff3f6; color: var(--ink); }
+  .side.js pre.code .j-str { background: var(--pink-soft); color: var(--ink); font-weight: 600; }
+
+  .score { margin-top: 22px; }
+  .score .win-body { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; padding: 0; }
+  @media (max-width: 760px) { .score .win-body { grid-template-columns: 1fr 1fr; } }
+  .score .cell { padding: 12px 14px; }
+  .score .cell + .cell { border-left: 1.5px solid var(--ink); }
+  .score .k { font: 18px/1 var(--pixel); color: var(--grey-3); }
+  .score .v { font: 600 34px/1.1 var(--grotesk); letter-spacing: -0.03em; }
+  .score .v small { font-size: 16px; color: var(--grey-3); }
+  .v.js-c { background: var(--pink); display: inline-block; padding: 0 6px; }
+
+  .flash { animation: flash .5s steps(4); }
+  @keyframes flash { 0% { opacity: .2; } 100% { opacity: 1; } }
+
+  /* ---------- How + footer ---------- */
+  .how-wrap { padding: 50px 24px 20px; }
+  .how-title { max-width: 1240px; margin: 0 auto 22px; font: 600 clamp(32px, 5vw, 64px)/1 var(--grotesk); letter-spacing: -0.04em; text-align: center; }
+  .how { max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  @media (max-width: 860px) { .how { grid-template-columns: 1fr; } }
+  .how h3 { font: 600 20px/1.2 var(--grotesk); margin: 0 0 8px; letter-spacing: -0.02em; }
+  .how p { margin: 0; font-size: 13px; color: #3a3a3a; }
+  footer { max-width: 1240px; margin: 40px auto 0; padding: 18px 24px 36px; border-top: 1.5px solid var(--ink); display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; font-size: 12.5px; }
+  .install { display: inline-flex; align-items: center; gap: 10px; font: 500 13px var(--mono); padding: 7px 12px; border: 1.5px solid var(--ink); background: var(--ink); color: var(--paper); cursor: pointer; box-shadow: 3px 3px 0 var(--pink); }
+  .install .p { color: var(--pink); }
+  .disclaimer { color: var(--grey-3); }
+</style>
+</head>
+<body>
+<nav class="nav">
+  <div class="nav-group"><span class="item brand">jev-state</span><span class="item">Playground</span></div>
+  <div class="nav-group">
+    <span class="item" id="model-pill"><span class="dot" id="dot"></span><span id="model">Jev</span></span>
+    <a href="https://www.npmjs.com/package/jev-state" target="_blank" rel="noopener">npm</a>
+    <a href="https://github.com/suranjaychandra/jev-state" target="_blank" rel="noopener" class="dark">GitHub</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="clouds"></div>
+  <div class="hero-inner">
+    <div class="win news">
+      <div class="win-bar"><span>jev-state · v0.1.0</span><span class="boxes"><i></i></span></div>
+      <div class="win-body"><b>Same AI. Same question. Same rules.</b><br />Only the state format changes.</div>
+    </div>
+    <div class="intro-line">Raw state <span>··········</span> jev-state</div>
+    <h1>Only the data changes.<br /><span class="hl">Watch the answer change.</span></h1>
+    <p class="lede">Set up a situation. Jev answers it twice: once from <b>raw state</b>, the way your app stores it, and once from state prepared by <b>jev-state</b>, which turns numbers, counts, and timestamps into words Jev reads well.</p>
+  </div>
+</section>
+
+<div class="mock-banner win"><div class="win-bar"><span>MOCK_MODE.txt</span><span class="boxes"><i></i></span></div><div class="win-body"><b>Mock mode.</b> These answers are random and do not come from Jev. Use this only to check the layout. Run <code style="background:#333">npm start</code> for real answers.</div></div>
+
+<div class="stage">
+  <div class="grid">
+    <aside class="win controls">
+      <div class="win-bar"><span>CONTROLS.app</span><span class="boxes"><i></i><i></i></span></div>
+      <div class="win-body">
+        <div class="tabs" role="tablist">
+          <button class="tab active" data-domain="game">🎮 Game NPC</button>
+          <button class="tab" data-domain="ticket">🎫 Support ticket</button>
+        </div>
+        <div class="section-label">&gt; try a preset</div>
+        <div class="presets" id="presets"></div>
+        <div class="section-label">&gt; or set your own</div>
+        <div id="fields"></div>
+        <button class="ask" id="ask"><span class="spinner">▮</span><span id="ask-label">ASK JEV</span><span class="kbd">⌘↵</span></button>
+        <div class="error" id="error"></div>
+        <details class="rules">
+          <summary>Rules Jev is given (same for both sides)</summary>
+          <pre id="rules"></pre>
+        </details>
+      </div>
+    </aside>
+
+    <main>
+      <div class="win verdict">
+        <div class="win-bar"><span>ANSWER_KEY.txt</span><span class="boxes"><i></i></span></div>
+        <div class="win-body">
+          <div>
+            <div class="k">correct answer by the rules</div>
+            <div class="v" id="expected">…</div>
+          </div>
+          <div class="why" id="why"></div>
+        </div>
+      </div>
+
+      <div class="compare">
+        <section class="win side raw">
+          <div class="win-bar"><span>RAW_STATE.json</span><span class="tag">no jev-state</span></div>
+          <div class="win-body">
+            <div class="side-sub">What your app already has</div>
+            <div class="decision" id="raw-decision"><div class="placeholder">Press <b>&nbsp;ASK JEV&nbsp;</b> to see its decision</div></div>
+            <div class="stats">
+              <div class="stat"><div class="k">sent</div><div class="v" id="raw-chars">–</div></div>
+              <div class="stat"><div class="k">tokens</div><div class="v" id="raw-tokens">–</div></div>
+              <div class="stat"><div class="k">latency</div><div class="v" id="raw-ms">–</div></div>
+            </div>
+            <div class="code-label"><span>&gt; sent to jev</span><span>numbers, epoch times, engine data</span></div>
+            <pre class="code" id="raw-code"></pre>
+          </div>
+        </section>
+
+        <section class="win side js">
+          <div class="win-bar"><span>JEV_STATE.json</span><span class="tag">project()</span></div>
+          <div class="win-body">
+            <div class="side-sub">After <code>npm install jev-state</code></div>
+            <div class="decision" id="js-decision"><div class="placeholder">Press <b>&nbsp;ASK JEV&nbsp;</b> to see its decision</div></div>
+            <div class="stats">
+              <div class="stat"><div class="k">sent</div><div class="v" id="js-chars">–</div></div>
+              <div class="stat"><div class="k">tokens</div><div class="v" id="js-tokens">–</div></div>
+              <div class="stat"><div class="k">latency</div><div class="v" id="js-ms">–</div></div>
+            </div>
+            <div class="code-label"><span>&gt; sent to jev</span><span>words Jev reads well</span></div>
+            <pre class="code" id="js-code"></pre>
+          </div>
+        </section>
+      </div>
+
+      <div class="win score">
+        <div class="win-bar"><span>SESSION.log</span><span class="boxes"><i></i></span></div>
+        <div class="win-body">
+          <div class="cell"><div class="k">decisions</div><div class="v" id="s-runs">0</div></div>
+          <div class="cell"><div class="k">raw correct</div><div class="v" id="s-raw">0<small>/0</small></div></div>
+          <div class="cell"><div class="k">jev-state correct</div><div class="v js-c" id="s-js">0<small>/0</small></div></div>
+          <div class="cell"><div class="k">tokens saved</div><div class="v" id="s-tok">–</div></div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<section class="how-wrap">
+  <div class="how-title">How it works</div>
+  <div class="how">
+    <div class="win"><div class="win-bar"><span>01_RAW</span><span class="boxes"><i></i></span></div><div class="win-body"><h3>Your app has raw state</h3><p><code>hp: 38, maxHp: 250</code>, epoch timestamps, cents, IDs, positions. Jev reads numbers as text, can't count, and gets distracted by irrelevant fields.</p></div></div>
+    <div class="win"><div class="win-bar"><span>02_PROJECT</span><span class="boxes"><i></i></span></div><div class="win-body"><h3>jev-state does the math in code</h3><p><code>band()</code>, <code>count()</code>, <code>time()</code>, and <code>prune()</code> turn it into <code>"critical"</code>, <code>"3 or more times"</code>, <code>"a few minutes ago"</code>.</p></div></div>
+    <div class="win"><div class="win-bar"><span>03_DECIDE</span><span class="boxes"><i></i></span></div><div class="win-body"><h3>Jev makes the decision</h3><p>Same model, same question, same rules. On a 420-call benchmark, accuracy went from <b>74% to 100%</b> with <b>43% fewer tokens</b>.</p></div></div>
+  </div>
+</section>
+
+<footer>
+  <button class="install" id="install" title="Copy"><span class="p">$</span> npm install jev-state <span id="copied" style="opacity:.6">copy</span></button>
+  <span>Built by Suranjay Kumar · MIT · <a href="https://github.com/suranjaychandra/jev-state" target="_blank" rel="noopener">github.com/suranjaychandra/jev-state</a><br /><span class="disclaimer">Unofficial community tool. Not affiliated with or endorsed by TypeSafe AI.</span></span>
+</footer>
+
+<script>
+const PRESETS = {
+  game: [
+    { label: "Low health, enemy close", v: { hp: 38, maxHp: 250, ammo: 12, medkits: 1, enemyDistances: [7.9, 45], noiseSecondsAgo: 30 } },
+    { label: "Hurt, enemies far, has medkit", v: { hp: 90, maxHp: 500, ammo: 20, medkits: 1, enemyDistances: [25.4, 60.2], noiseSecondsAgo: null } },
+    { label: "Healthy, enemies in range", v: { hp: 180, maxHp: 250, ammo: 20, medkits: 0, enemyDistances: [15, 40], noiseSecondsAgo: null } },
+    { label: "Heard a noise 20s ago", v: { hp: 200, maxHp: 250, ammo: 25, medkits: 0, enemyDistances: [], noiseSecondsAgo: 20 } },
+    { label: "Quiet, noise 150s ago", v: { hp: 200, maxHp: 250, ammo: 25, medkits: 0, enemyDistances: [], noiseSecondsAgo: 150 } },
+  ],
+  ticket: [
+    { label: "$649 order, open 30h", v: { orderTotal: 649, hoursOpen: 30, contacts: 1 } },
+    { label: "Asked 3 times", v: { orderTotal: 120, hoursOpen: 2, contacts: 3 } },
+    { label: "$899 order, open 5h", v: { orderTotal: 899, hoursOpen: 5, contacts: 1 } },
+    { label: "$40 order, open 1h", v: { orderTotal: 40, hoursOpen: 1, contacts: 1 } },
+  ],
+};
+const WHY = {
+  game: "Raw state makes Jev divide hp by maxHp, compare distances to 10 m, and subtract timestamps. jev-state does that in code.",
+  ticket: "Raw state makes Jev convert cents to dollars, subtract ISO timestamps, and count the contact log. jev-state does that in code.",
+};
+
+const state = {
+  domain: "game",
+  game: structuredClone(PRESETS.game[0].v),
+  ticket: structuredClone(PRESETS.ticket[0].v),
+};
+let info = { rules: {} };
+let session = { runs: 0, raw: 0, js: 0, rawTok: 0, jsTok: 0 };
+const $ = (id) => document.getElementById(id);
+
+// ---------- Controls ----------
+
+function slider(key, label, min, max, step, fmt = (v) => v, hint = "") {
+  const v = state[state.domain][key];
+  return `<div class="field">
+    <div class="field-top"><label for="f-${key}">${label}</label><span class="val" id="v-${key}">${fmt(v)}</span></div>
+    <input type="range" id="f-${key}" data-key="${key}" min="${min}" max="${max}" step="${step}" value="${v}" />
+    ${hint ? `<div class="hint">${hint}</div>` : ""}
+  </div>`;
+}
+
+function renderFields() {
+  const d = state.domain;
+  const s = state[d];
+  let html = "";
+  if (d === "game") {
+    s.hp = Math.min(s.hp, s.maxHp);
+    html += `<div class="field"><div class="row2">
+      <div><div class="field-top"><label for="f-maxHp">Max health</label></div><input type="number" id="f-maxHp" data-key="maxHp" min="1" max="10000" value="${s.maxHp}" /></div>
+      <div><div class="field-top"><label for="f-medkits">Medkits</label></div><input type="number" id="f-medkits" data-key="medkits" min="0" max="9" value="${s.medkits}" /></div>
+    </div></div>`;
+    html += slider("hp", "Health", 0, s.maxHp, 1, (v) => `${v} / ${s.maxHp} · ${Math.round((v / s.maxHp) * 100)}%`);
+    html += slider("ammo", "Ammo", 0, 30, 1);
+    const chips = s.enemyDistances.length
+      ? s.enemyDistances.map((dist, i) => `<span class="enemy ${dist < 10 ? "near" : ""}">${dist} m<button data-remove="${i}" aria-label="Remove">×</button></span>`).join("")
+      : `<span class="none">No enemies visible</span>`;
+    html += `<div class="field"><div class="field-top"><label>Enemies (distance)</label><span class="val">${s.enemyDistances.length}</span></div>
+      <div class="enemies">${chips}</div>
+      <div class="add-row"><input type="text" id="enemy-input" placeholder="e.g. 7.9" inputmode="decimal" /><button id="enemy-add">Add</button></div>
+      <div class="hint">Under 10 m counts as "near".</div></div>`;
+    const heard = s.noiseSecondsAgo !== null;
+    html += `<div class="field"><label class="switch"><input type="checkbox" id="noise-on" ${heard ? "checked" : ""} /><span class="track"></span>Heard a noise</label></div>`;
+    if (heard) html += slider("noiseSecondsAgo", "Noise was", 0, 600, 5, (v) => `${v} s ago`, "Under 60 s counts as recent.");
+  } else {
+    html += slider("orderTotal", "Order total", 0, 2000, 1, (v) => `$${v}`, "$500 or more is a big order.");
+    html += slider("hoursOpen", "Ticket opened", 0, 72, 1, (v) => `${v} h ago`, "More than 24 h is waiting long.");
+    html += slider("contacts", "Customer contacted support", 0, 6, 1, (v) => `${v} time${v === 1 ? "" : "s"}`, "3 or more is a repeat contact.");
+  }
+  $("fields").innerHTML = html;
+  $("presets").innerHTML = PRESETS[d].map((p, i) => `<button class="chip" data-preset="${i}">${p.label}</button>`).join("");
+  $("rules").textContent = info.rules[d] || "";
+  $("why").textContent = WHY[d];
+}
+
+$("fields").addEventListener("input", (e) => {
+  const key = e.target.dataset.key;
+  if (!key) return;
+  const s = state[state.domain];
+  s[key] = Number(e.target.value);
+  if (key === "maxHp") { renderFields(); }
+  const out = $("v-" + key);
+  if (out) {
+    if (key === "hp") out.textContent = `${s.hp} / ${s.maxHp} · ${Math.round((s.hp / s.maxHp) * 100)}%`;
+    else if (key === "orderTotal") out.textContent = `$${s[key]}`;
+    else if (key === "hoursOpen") out.textContent = `${s[key]} h ago`;
+    else if (key === "contacts") out.textContent = `${s[key]} time${s[key] === 1 ? "" : "s"}`;
+    else if (key === "noiseSecondsAgo") out.textContent = `${s[key]} s ago`;
+    else out.textContent = s[key];
+  }
+  preview();
+});
+
+$("fields").addEventListener("change", (e) => {
+  if (e.target.id === "noise-on") {
+    state.game.noiseSecondsAgo = e.target.checked ? 30 : null;
+    renderFields();
+    preview();
+  }
+});
+
+function addEnemy() {
+  const input = $("enemy-input");
+  const d = parseFloat(input.value);
+  if (!Number.isFinite(d) || d < 0) return;
+  state.game.enemyDistances.push(Math.round(d * 10) / 10);
+  renderFields();
+  preview();
+  $("enemy-input").focus();
+}
+
+$("fields").addEventListener("click", (e) => {
+  if (e.target.id === "enemy-add") addEnemy();
+  if (e.target.dataset.remove !== undefined) {
+    state.game.enemyDistances.splice(Number(e.target.dataset.remove), 1);
+    renderFields();
+    preview();
+  }
+});
+$("fields").addEventListener("keydown", (e) => {
+  if (e.target.id === "enemy-input" && e.key === "Enter" && !e.metaKey && !e.ctrlKey) { e.preventDefault(); addEnemy(); }
+});
+
+$("presets").addEventListener("click", (e) => {
+  const i = e.target.dataset.preset;
+  if (i === undefined) return;
+  state[state.domain] = structuredClone(PRESETS[state.domain][i].v);
+  renderFields();
+  preview();
+});
+
+document.querySelectorAll(".tab").forEach((t) => t.addEventListener("click", () => {
+  document.querySelectorAll(".tab").forEach((x) => x.classList.toggle("active", x === t));
+  state.domain = t.dataset.domain;
+  renderFields();
+  resetDecisions();
+  preview();
+}));
+
+// ---------- Rendering ----------
+
+const esc = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+function highlight(obj, pretty) {
+  const json = esc(JSON.stringify(obj, null, pretty ? 2 : 0));
+  return json.replace(/("(?:\\.|[^"\\])*")(\s*:)?|\b(true|false|null)\b|(-?\d+(?:\.\d+)?(?:e[+-]?\d+)?)/gi, (m, str, colon, lit, n) => {
+    if (str) return colon ? `<span class="j-key">${str}</span>${colon}` : `<span class="j-str">${str}</span>`;
+    if (lit) return `<span class="j-lit">${lit}</span>`;
+    return `<span class="j-num">${n}</span>`;
+  });
+}
+
+let lastExpected = null;
+function renderStates(data) {
+  $("raw-code").innerHTML = highlight(data.raw.state, false);
+  $("js-code").innerHTML = highlight(data.jevState.state, true);
+  $("raw-chars").textContent = data.raw.chars.toLocaleString();
+  $("js-chars").textContent = data.jevState.chars.toLocaleString();
+  $("expected").textContent = data.expected;
+  lastExpected = data.expected;
+}
+
+function resetDecisions() {
+  for (const side of ["raw", "js"]) {
+    $(`${side}-decision`).innerHTML = `<div class="placeholder">Press <b>&nbsp;ASK JEV&nbsp;</b> to see its decision</div>`;
+    $(`${side}-tokens`).textContent = "–";
+    $(`${side}-ms`).textContent = "–";
+  }
+}
+
+function markStale() {
+  for (const side of ["raw", "js"]) {
+    const el = $(`${side}-decision`);
+    if (el.querySelector(".answer")) el.classList.add("stale");
+  }
+}
+
+function renderDecision(side, ans, expected, options) {
+  const ok = ans.choice === expected;
+  const order = [...options].sort((a, b) => (ans.probabilities[b] ?? 0) - (ans.probabilities[a] ?? 0));
+  const el = $(`${side}-decision`);
+  el.classList.remove("stale");
+  el.innerHTML = `
+    <div class="k">Jev decided</div>
+    <div class="answer-line"><div class="answer">${esc(ans.choice)}</div><span class="mark ${ok ? "ok" : "no"}">${ok ? "✓ CORRECT" : "✗ WRONG"}</span></div>
+    <div class="conf">Confidence <div class="bar"><i style="width:0"></i></div><b>${Math.round(ans.confidence * 100)}%</b></div>
+    <div class="probs" style="margin-top:12px">${order.map((o) => `
+      <div class="prob ${o === ans.choice ? "chosen" : ""}"><span class="name">${esc(o)}${o === expected ? '<span class="correct-tag">✓</span>' : ""}</span>
+      <span class="mini"><i style="width:0" data-w="${((ans.probabilities[o] ?? 0) * 100).toFixed(1)}"></i></span>
+      <span class="p">${Math.round((ans.probabilities[o] ?? 0) * 100)}%</span></div>`).join("")}</div>`;
+  el.classList.remove("flash"); void el.offsetWidth; el.classList.add("flash");
+  requestAnimationFrame(() => {
+    el.querySelector(".bar > i").style.width = `${ans.confidence * 100}%`;
+    el.querySelectorAll(".mini > i").forEach((i) => (i.style.width = `${i.dataset.w}%`));
+  });
+  $(`${side}-tokens`).textContent = ans.tokens.toLocaleString();
+  $(`${side}-ms`).textContent = `${ans.ms} ms`;
+}
+
+function renderScore() {
+  $("s-runs").textContent = session.runs;
+  $("s-raw").innerHTML = `${session.raw}<small>/${session.runs}</small>`;
+  $("s-js").innerHTML = `${session.js}<small>/${session.runs}</small>`;
+  $("s-tok").textContent = session.rawTok ? `${Math.round((1 - session.jsTok / session.rawTok) * 100)}%` : "–";
+}
+
+// ---------- API ----------
+
+let previewTimer;
+function preview() {
+  clearTimeout(previewTimer);
+  markStale();
+  previewTimer = setTimeout(async () => {
+    try {
+      const r = await fetch("/api/preview", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ domain: state.domain, input: state[state.domain] }) });
+      renderStates(await r.json());
+    } catch {}
+  }, 120);
+}
+
+async function ask() {
+  const btn = $("ask");
+  if (btn.disabled) return;
+  btn.disabled = true;
+  $("ask-label").textContent = "ASKING JEV TWICE";
+  $("error").style.display = "none";
+  try {
+    const r = await fetch("/api/decide", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ domain: state.domain, input: state[state.domain] }) });
+    const data = await r.json();
+    if (!r.ok) throw new Error(data.error || "Request failed");
+    renderStates(data);
+    renderDecision("raw", data.raw.answer, data.expected, data.options);
+    renderDecision("js", data.jevState.answer, data.expected, data.options);
+    if (data.model && !data.mock) $("model").textContent = data.model;
+    session.runs++;
+    if (data.raw.answer.choice === data.expected) session.raw++;
+    if (data.jevState.answer.choice === data.expected) session.js++;
+    session.rawTok += data.raw.answer.tokens;
+    session.jsTok += data.jevState.answer.tokens;
+    renderScore();
+  } catch (err) {
+    $("error").textContent = String(err.message || err);
+    $("error").style.display = "block";
+  } finally {
+    btn.disabled = false;
+    $("ask-label").textContent = "ASK JEV";
+  }
+}
+
+$("ask").addEventListener("click", ask);
+document.addEventListener("keydown", (e) => { if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) ask(); });
+$("install").addEventListener("click", async () => {
+  try { await navigator.clipboard.writeText("npm install jev-state"); $("copied").textContent = "copied ✓"; setTimeout(() => ($("copied").textContent = "copy"), 1500); } catch {}
+});
+
+(async () => {
+  try {
+    info = await (await fetch("/api/info")).json();
+    if (info.mock) { document.body.classList.add("is-mock"); $("dot").classList.add("mock"); $("model").textContent = "Mock mode"; }
+    else $("model").textContent = "Live Jev";
+  } catch {}
+  renderFields();
+  preview();
+})();
+</script>
+</body>
+</html>

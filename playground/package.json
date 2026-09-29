@@ -1,0 +1,19 @@
+{
+  "name": "jev-state-playground",
+  "private": true,
+  "type": "module",
+  "description": "Try Jev with raw state and with jev-state, side by side.",
+  "devDependencies": {
+    "tsx": "^4.23.15"
+  },
+  "dependencies": {
+    "@typesafe-ai/sdk": "^0.6.0",
+    "jev-state": "^0.1.0"
+  },
+  "scripts": {
+    "start": "tsx server.ts",
+    "start:mock": "tsx server.ts --mock",
+    "raw": "tsx 1-raw.ts",
+    "jev-state": "tsx 2-jev-state.ts"
+  }
+}
