@@ -67,6 +67,12 @@ npm start               # http://localhost:3000
 
 Your key stays in the local server. See [`playground/README.md`](playground/README.md) for details.
 
+## See it in a game: Two Bots, One Brain
+
+[**two-bots-one-brain**](https://github.com/suranjaychandra/two-bots-one-brain) is a small browser game built on jev-state. Two bots share one brain (Jev) and the same rules. One sends its raw game state, the other sends it through `project()`. You fight both at once, and a live meter counts each bot's wrong decisions by the rules.
+
+[![Two Bots, One Brain: raw bot vs jev-state bot, with a live mistakes meter](https://raw.githubusercontent.com/suranjaychandra/two-bots-one-brain/main/docs/gameplay.png)](https://github.com/suranjaychandra/two-bots-one-brain)
+
 ## `project(raw, schema, options?)`
 
 Returns `{ state, meta }`. `meta.changed` and `meta.dropped` list the paths that were rewritten or removed.
