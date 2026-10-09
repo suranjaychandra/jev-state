@@ -2,7 +2,7 @@
 
 All notable changes to jev-state. This project follows [semantic versioning](https://semver.org/).
 
-## Unreleased (0.1.1)
+## 0.1.1 (2026-10-10)
 
 ### Docs
 - **Quick start:** raw state to a Jev decision in one file ([`examples/quickstart.ts`](examples/quickstart.ts)).
