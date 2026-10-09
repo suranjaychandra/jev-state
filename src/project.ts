@@ -2,6 +2,7 @@ import {
   DROP,
   ENV,
   type Env,
+  type JsonObject,
   type ProjectOptions,
   type Rule,
   type RuleContext,
@@ -11,7 +12,7 @@ import {
   isPlainObject,
 } from "./rule.js";
 
-export interface Projection<T = Record<string, unknown>> {
+export interface Projection<T = JsonObject> {
   /** The state to send to Jev. */
   state: T;
   meta: {
@@ -28,7 +29,7 @@ export interface Projection<T = Record<string, unknown>> {
  * The input is never mutated. Every rule sees raw values, so a rule can read a sibling
  * (for example `maxHp`) even when another rule drops that sibling.
  */
-export function project<T = Record<string, unknown>>(
+export function project<T = JsonObject>(
   raw: object,
   schema: Schema,
   options: ProjectOptions = {},

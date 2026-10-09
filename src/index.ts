@@ -23,4 +23,5 @@ export {
   type Resolvable,
   type EntryType,
   type JsonValue,
+  type JsonObject,
 } from "./rule.js";

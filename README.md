@@ -54,6 +54,197 @@ npm install jev-state
 
 Node.js 22+. Ships ESM, CommonJS, and TypeScript types.
 
+## Quick start
+
+```sh
+npm install jev-state @typesafe-ai/sdk
+export TYPESAFE_API_KEY=your-key   # from TypeSafe
+```
+
+Save this as `quickstart.ts` and run it with `npx tsx quickstart.ts`:
+
+<!-- example: examples/quickstart.ts -->
+```ts
+import { TypeSafeClient, choice } from "@typesafe-ai/sdk";
+import { band, count, project, time } from "jev-state";
+
+// 1. The state your app already has: exact numbers, epoch times, extra fields.
+const now = Date.now();
+const raw = {
+  hp: 38,
+  maxHp: 250,
+  enemies: [{ distance: 7.9 }, { distance: 45 }],
+  lastNoiseAt: now - 20_000,
+  debug: { frameMs: 11.2, drawCalls: 1432 },
+};
+
+// 2. Describe it once. You choose the thresholds; jev-state applies them.
+const { state } = project(
+  raw,
+  {
+    hp: band({ max: (ctx) => ctx.parent.maxHp, cuts: [0.2, 0.5], labels: ["critical", "low", "healthy"] }),
+    enemies: count(),
+    lastNoiseAt: time({ now }),
+  },
+  { unknown: "drop" },
+);
+console.log(state);
+// { hp: "critical", enemies: "a few", lastNoiseAt: "less than a minute ago" }
+
+// 3. Ask Jev as usual. TypeSafeClient reads TYPESAFE_API_KEY from the environment.
+const client = new TypeSafeClient();
+const { answers } = await client.systemOne({
+  state,
+  questions: {
+    action: choice("What should the NPC do next?", {
+      retreat: "Health is critical and enemies are around.",
+      attack: "Health is fine and enemies are around.",
+      patrol: "No enemies are around.",
+    }),
+  },
+});
+console.log(answers.action.choice, answers.action.confidence);
+// retreat 1
+```
+
+`project()` returns plain JSON, so `state` goes straight into `client.systemOne()`.
+
+## Which rule should I use?
+
+| Your state has… | Use | Example |
+|---|---|---|
+| A number whose meaning depends on a range (health, price, score, distance) | `band()` | `hp: 38` of 250 → `"critical"` |
+| A list or a count | `count()` | `[3 contacts]` → `"3 or more times"` |
+| A timestamp or date | `time()` | `1790678485386` → `"less than a minute ago"` |
+| Fields the decision doesn't need (ids, positions, debug data) | `prune()`, `drop()`, or `unknown: "drop"` | `meshId`, `position` → removed |
+| A value computed from several fields | `pipe()` with your own function first | cents + hours open → `"$500 or more"`, `"more than 24 hours"` |
+| A list Jev should choose from | `pick()` | three tools → `"refund_order"`, mapped back to the tool object |
+
+You choose the thresholds; jev-state applies them the same way on every call.
+
+## Recipes
+
+Each recipe is a runnable file in [`examples/recipes/`](examples/recipes).
+
+### Game NPC
+
+<!-- example: examples/recipes/game-npc.ts -->
+```ts
+import { band, count, each, pipe, project, prune, time } from "jev-state";
+
+const now = Date.now();
+const raw = {
+  npc: { hp: 90, maxHp: 500, ammo: 3, medkits: 1, meshId: "soldier_2", position: { x: 12.4, y: 0, z: -88.1 } },
+  enemies: [
+    { id: "e1", type: "sniper", distance: 62.4, velocity: { x: 0, z: 0.1 } },
+    { id: "e2", type: "rifleman", distance: 7.9, velocity: { x: 1.2, z: -0.4 } },
+  ],
+  lastNoiseAt: now - 4_000,
+};
+
+const { state } = project(
+  raw,
+  {
+    npc: {
+      // A fraction of each NPC's own max health: 90 of 500 is 18%, so "critical".
+      hp: band({ max: (ctx) => ctx.parent.maxHp, cuts: [0.2, 0.5], labels: ["critical", "low", "healthy"] }),
+      ammo: count({ few: 5, many: 15 }),
+      medkits: count(),
+    },
+    // Nearest first, at most five, only the fields the decision needs.
+    enemies: pipe(
+      prune({ keep: ["type", "distance"], sortBy: (a, b) => a.distance - b.distance, max: 5 }),
+      each({ distance: band({ cuts: [10, 30], labels: ["near", "medium", "far"] }) }),
+    ),
+    lastNoiseAt: time({ now }),
+  },
+  { unknown: "drop" },
+);
+
+console.log(state);
+// {
+//   npc: { hp: "critical", ammo: "a few", medkits: "one" },
+//   enemies: [{ type: "rifleman", distance: "near" }, { type: "sniper", distance: "far" }],
+//   lastNoiseAt: "just now"
+// }
+```
+
+### Support ticket, with derived fields
+
+<!-- example: examples/recipes/support-ticket.ts -->
+```ts
+import { band, count, pipe, project } from "jev-state";
+
+const HOUR = 3_600_000;
+const raw = {
+  ticket: { id: "T-48213", createdAt: "2026-10-09T06:00:00Z", internalRef: "zd_99812" },
+  order: { id: "ORD-7731", totalCents: 64_900, currency: "USD", warehouse: "SFO-2" },
+  contacts: [{ channel: "email" }, { channel: "chat" }, { channel: "email" }],
+  now: "2026-10-10T12:00:00Z",
+};
+
+const { state } = project(
+  raw,
+  {
+    // Derived fields: a rule keyed on a name the input doesn't have adds that field.
+    orderTotal: pipe(
+      (_, ctx) => ctx.root.order.totalCents,
+      band({ cuts: [50_000], labels: ["under $500", "$500 or more"] }),
+    ),
+    waiting: pipe(
+      (_, ctx) => (Date.parse(ctx.root.now) - Date.parse(ctx.root.ticket.createdAt)) / HOUR,
+      band({ cuts: [1, 24], labels: ["under an hour", "a few hours", "more than 24 hours"] }),
+    ),
+    contacts: count({ few: 2, many: 3, labels: { none: "0 times", one: "once", few: "twice", many: "3 or more times" } }),
+  },
+  { unknown: "drop" },
+);
+
+console.log(state);
+// { contacts: "3 or more times", orderTotal: "$500 or more", waiting: "more than 24 hours" }
+```
+
+### Agent tool choice with `pick()`
+
+<!-- example: examples/recipes/agent-pick.ts -->
+```ts
+import { pick } from "jev-state";
+
+const tools = [
+  { name: "search_docs", description: "Answer a how-to question from the product docs." },
+  { name: "refund_order", description: "Refund an order that was charged twice or never arrived." },
+  { name: "escalate", description: "Hand off to a human for anything legal, security, or account access." },
+];
+
+// A choice question with one option per tool, plus "none of these".
+const route = pick("Which tool should handle this request?", tools, {
+  label: (t) => t.name,
+  describe: (t) => t.description,
+  none: "None of these tools fit; reply directly.",
+});
+
+// Send route.question to Jev:
+//   const { answers } = await client.systemOne({ state: request, questions: { tool: route.question } });
+// then map the answer back to the original tool, or null below 60% confidence:
+const answer = { choice: "refund_order", confidence: 0.93 }; // stands in for answers.tool
+const tool = route.resolve(answer, { minConfidence: 0.6 });
+
+console.log(tool?.name ?? "fallback");
+// refund_order
+```
+
+## Debugging: what changed?
+
+`project()` also returns `meta`, the paths it rewrote and removed. For the quick start above:
+
+```ts
+const { state, meta } = project(raw, schema, { unknown: "drop" });
+console.log(meta.changed); // ["hp", "enemies", "lastNoiseAt"]
+console.log(meta.dropped); // ["maxHp", "debug"]
+```
+
+If a field you need is in `dropped`, add it to the schema (use `keep()` to pass it through unchanged).
+
 ## Try it: Playground
 
 [`playground/`](playground) is a local web app that asks Jev the same question twice, side by side: once with raw state, once through jev-state. It covers game NPC decisions and support-ticket priority. Set the numbers yourself and watch the answers, confidence, and tokens change.
@@ -164,6 +355,7 @@ npm install
 npm test          # unit tests, no network
 npm run typecheck
 npm run build
+npm run quickstart  # the quick start; needs TYPESAFE_API_KEY in .env
 npm run example   # one NPC decision; calls Jev if TYPESAFE_API_KEY is set
 npm run compare   # one situation sent as raw state and as jev-state; edit the numbers in examples/compare.ts
 ```

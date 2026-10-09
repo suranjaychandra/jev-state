@@ -4,7 +4,9 @@ export type Drop = typeof DROP;
 
 /** Text, a JSON object or array, or `null`: the shapes Jev accepts for state, instructions, and criteria. */
 export type JsonValue = string | number | boolean | null | JsonValue[] | { [key: string]: JsonValue };
-export type EntryType = string | { [key: string]: JsonValue } | JsonValue[] | null;
+/** A JSON object: what `project()` returns, and a valid `state` for `client.systemOne()`. */
+export type JsonObject = { [key: string]: JsonValue };
+export type EntryType = string | JsonObject | JsonValue[] | null;
 
 /** Where a rule is running. Rules always see the raw input, never already-projected values. */
 export interface RuleContext {
