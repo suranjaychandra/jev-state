@@ -2,17 +2,20 @@
 export const DROP: unique symbol = Symbol("jev-state.drop");
 export type Drop = typeof DROP;
 
-/** Text, a JSON object or array, or `null`: the shapes Jev accepts for state, instructions, and criteria. */
+/** JSON data. Numbers must be finite; `project()` validates its completed output at runtime. */
 export type JsonValue = string | number | boolean | null | JsonValue[] | { [key: string]: JsonValue };
 /** A JSON object: what `project()` returns, and a valid `state` for `client.systemOne()`. */
 export type JsonObject = { [key: string]: JsonValue };
 export type EntryType = string | JsonObject | JsonValue[] | null;
 
-/** Where a rule is running. Rules always see the raw input, never already-projected values. */
+/** Where a rule is running. `root` stays original; nested containers follow the current pipeline stage. */
 export interface RuleContext {
   /** The whole raw input passed to `project()`. */
   readonly root: any;
-  /** The raw object or array holding this value. */
+  /**
+   * The input container for this field or element: a schema's input object, or `each()`'s input array.
+   * Sibling rules do not change it. A later pipeline stage may receive a transformed container.
+   */
   readonly parent: any;
   /** This value's key in `parent`. */
   readonly key: string | number;
@@ -23,7 +26,8 @@ export interface RuleContext {
 }
 
 /**
- * A function from a raw value to its projected value. Return `DROP` to remove the field,
+ * A function from its input value to its projected value (`pipe()` passes the previous stage's output).
+ * Return `DROP` to remove the field,
  * or `undefined` to leave it out. A rule may also be keyed on a field the raw input lacks,
  * which lets it add a derived field.
  */
@@ -37,8 +41,18 @@ export interface Schema {
 export interface ProjectOptions {
   /** What to do with fields the schema doesn't mention. Default: `"keep"`. */
   unknown?: "keep" | "drop";
-  /** Drop `null`, `""`, `[]`, and `{}` values. Default: `true`. */
+  /**
+   * Drop null, "", [], and {} at schema fields; recursively clean fields no rule touches.
+   * Does not recursively clean containers returned by function rules, including keep().
+   * Empty array elements remain in place. Default: true.
+   */
   dropEmpty?: boolean;
+  /**
+   * Check that the finished state is plain JSON, and throw a TypeError with the field path
+   * if it holds a Date, class instance, NaN, Infinity, undefined array element, or a cycle.
+   * Default: false.
+   */
+  strict?: boolean;
 }
 
 /** @internal */

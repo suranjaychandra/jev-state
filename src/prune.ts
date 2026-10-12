@@ -17,6 +17,8 @@ export interface PruneOptions<T = any> {
  * Cut state down to what the question needs, since Jev gets worse as irrelevant state grows.
  * On an array it filters, sorts, and truncates, then prunes each object element.
  * On an object it prunes that object's fields.
+ * Internal field/element removals are not individually recorded in `meta.dropped`.
+ * When applied at a schema field, a new container is recorded in `meta.changed` instead.
  */
 export function prune<T = any>(options: PruneOptions<T>): Rule {
   const { keep, omit, filter, sortBy, max } = options;

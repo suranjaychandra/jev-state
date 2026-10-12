@@ -38,6 +38,8 @@ export interface Pick<T> {
   /**
    * Map Jev's answer back to the original item. Returns `null` for "none of these",
    * an unknown id, or confidence below `minConfidence`.
+   * `minConfidence` applies only when you pass the full answer object, not a string id.
+   * Missing or non-finite confidence counts as below the threshold.
    */
   resolve(answer: ChoiceAnswer | string, options?: { minConfidence?: number }): T | null;
 }
@@ -85,7 +87,8 @@ export function pick<T>(instructions: EntryType, items: readonly T[], options: P
     resolve(answer, opts = {}) {
       const id = typeof answer === "string" ? answer : answer.choice;
       if (typeof answer !== "string" && opts.minConfidence !== undefined) {
-        if (answer.confidence === undefined || answer.confidence < opts.minConfidence) return null;
+        const confidence: unknown = answer.confidence;
+        if (typeof confidence !== "number" || !Number.isFinite(confidence) || confidence < opts.minConfidence) return null;
       }
       return byId.get(id) ?? null;
     },

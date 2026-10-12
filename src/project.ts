@@ -1,3 +1,4 @@
+import { assertJson } from "./json.js";
 import {
   DROP,
   ENV,
@@ -16,9 +17,9 @@ export interface Projection<T = JsonObject> {
   /** The state to send to Jev. */
   state: T;
   meta: {
-    /** Paths a rule rewrote or added. */
+    /** Schema field paths whose function rule returned a different value/reference (excluding DROP/undefined). Not a deep diff. */
     changed: string[];
-    /** Paths removed by `drop()`, `unknown: "drop"`, or `dropEmpty`. */
+    /** Field paths removed during schema processing or empty-field cleanup. Excludes removals inside prune/custom rules and array elements removed by each(). */
     dropped: string[];
   };
 }
@@ -26,8 +27,10 @@ export interface Projection<T = JsonObject> {
 /**
  * Apply a schema of rules to raw state and return the state to send to Jev.
  *
- * The input is never mutated. Every rule sees raw values, so a rule can read a sibling
- * (for example `maxHp`) even when another rule drops that sibling.
+ * The built-in rules do not mutate input. Rules within the same schema read that schema's
+ * input object, so one rule can read a sibling even when another drops it. A schema inside
+ * `pipe()` reads the previous stage's output. `ctx.root` always points to the original input.
+ * With `strict: true`, throws a TypeError with a field path if the output is not plain JSON.
  */
 export function project<T = JsonObject>(
   raw: object,
@@ -43,6 +46,7 @@ export function project<T = JsonObject>(
     dropped: new Set(),
   };
   const state = applySchema(raw, schema, "", env) as T;
+  if (options.strict) assertJson(state);
   return { state, meta: { changed: [...env.changed], dropped: [...env.dropped] } };
 }
 
@@ -54,13 +58,13 @@ export function applyEntry(value: unknown, entry: Rule | Schema, ctx: RuleContex
 }
 
 function applySchema(obj: Record<string, unknown>, schema: Schema, path: string, env: Env) {
-  const out: Record<string, unknown> = {};
+  const entries: [string, unknown][] = [];
   const keys = new Set([...Object.keys(obj), ...Object.keys(schema)]);
 
   for (const key of keys) {
     const here = childPath(path, key);
     const had = Object.hasOwn(obj, key);
-    const raw = obj[key];
+    const raw = had ? obj[key] : undefined;
     const entry = Object.hasOwn(schema, key) ? schema[key] : undefined;
 
     let value: unknown;
@@ -86,24 +90,33 @@ function applySchema(obj: Record<string, unknown>, schema: Schema, path: string,
       if (had) env.dropped.add(here);
       continue;
     }
-    out[key] = value;
+    entries.push([key, value]);
   }
-  return out;
+  // Define own data properties, including __proto__, without invoking inherited setters.
+  return Object.fromEntries(entries);
 }
 
 /** Remove empty fields from a value no rule touched. Array elements are kept so indexes don't shift. */
-function clean(value: unknown, path: string, env: Env): unknown {
-  if (Array.isArray(value)) return value.map((item) => clean(item, `${path}[]`, env));
-  if (!isPlainObject(value)) return value;
-  const out: Record<string, unknown> = {};
+function clean(value: unknown, path: string, env: Env, ancestors = new WeakSet<object>()): unknown {
+  if (!Array.isArray(value) && !isPlainObject(value)) return value;
+  // Leave cycles for final validation; a later pipeline stage may still remove them.
+  if (ancestors.has(value)) return value;
+  ancestors.add(value);
+  if (Array.isArray(value)) {
+    const result = value.map((item) => clean(item, `${path}[]`, env, ancestors));
+    ancestors.delete(value);
+    return result;
+  }
+  const entries: [string, unknown][] = [];
   for (const [key, child] of Object.entries(value)) {
     const here = childPath(path, key);
-    const cleaned = clean(child, here, env);
+    const cleaned = clean(child, here, env, ancestors);
     if (cleaned === undefined || isEmpty(cleaned)) {
       env.dropped.add(here);
       continue;
     }
-    out[key] = cleaned;
+    entries.push([key, cleaned]);
   }
-  return out;
+  ancestors.delete(value);
+  return Object.fromEntries(entries);
 }
