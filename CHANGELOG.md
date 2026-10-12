@@ -2,7 +2,7 @@
 
 All notable changes to jev-state. This project follows [semantic versioning](https://semver.org/).
 
-## Unreleased
+## 0.1.2 (2026-10-12)
 
 No breaking changes. State that worked in 0.1.1 produces the same output, except for the bug fixes below.
 

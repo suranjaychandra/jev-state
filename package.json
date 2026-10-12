@@ -1,6 +1,6 @@
 {
   "name": "jev-state",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Turn raw app and game state into something Jev reads well: numbers to labels, timestamps to relative time, lists pruned, candidates made pickable.",
   "license": "MIT",
   "author": "Suranjay Kumar",
