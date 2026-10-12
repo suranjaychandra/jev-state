@@ -10,12 +10,13 @@ const readme = read("README.md");
 const blocks = [...readme.matchAll(/<!-- example: (\S+) -->\n```ts\n([\s\S]*?)```/g)];
 
 describe("README examples", () => {
-  it("includes the quick start and every recipe", () => {
+  it("includes the quick start, recipes, and composition example", () => {
     expect(blocks.map((b) => b[1])).toEqual([
       "examples/quickstart.ts",
       "examples/recipes/game-npc.ts",
       "examples/recipes/support-ticket.ts",
       "examples/recipes/agent-pick.ts",
+      "examples/composition.ts",
     ]);
   });
 
