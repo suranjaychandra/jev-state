@@ -56,7 +56,8 @@
     "bench": "tsx bench/run.ts",
     "prepublishOnly": "npm run typecheck && npm test && npm run build",
     "compare": "tsx examples/compare.ts",
-    "quickstart": "node --env-file-if-exists=.env --import tsx examples/quickstart.ts"
+    "quickstart": "node --env-file-if-exists=.env --import tsx examples/quickstart.ts",
+    "check:package": "node scripts/check-package.mjs"
   },
   "devDependencies": {
     "@types/node": "^26.6.3",

@@ -28,10 +28,14 @@ You need Node.js 22 or newer.
 git clone https://github.com/suranjaychandra/jev-state.git
 cd jev-state
 npm install
+npm install --prefix playground  # dependencies for playground tests and typechecking
 npm test            # unit tests, no network, no API key
 npm run typecheck
 npm run build
+npm run check:package  # installs the packed package in fresh CommonJS and ESM projects
 ```
+
+The root `npm run typecheck` checks the library, tests, benchmark, examples, and all playground TypeScript files, including the server and both runner scripts. CI uses this same command. The inline browser JavaScript in `playground/public/index.html` is not typechecked; request-ordering tests exercise it with controlled responses and a minimal DOM.
 
 The library itself never calls the Jev API, so you don't need a key for library work. You only need a [TypeSafe](https://typesafe.ai) key for `npm run example`, `npm run compare`, `npm run bench`, and the playground. Put it in a `.env` file (copy `.env.example`). `.env` is git-ignored. Never commit a key.
 

@@ -22,7 +22,11 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
           cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            playground/package-lock.json
       - run: npm ci
+      - run: npm ci --prefix playground
       - run: npm run typecheck
       - run: npm test
       - run: npm run build
@@ -30,3 +34,5 @@ jobs:
         run: |
           node -e "require('./dist/index.cjs')"
           node --input-type=module -e "await import('./dist/index.mjs')"
+      - name: Install the packed package in fresh CommonJS and ESM projects
+        run: npm run check:package
