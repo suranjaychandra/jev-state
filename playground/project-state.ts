@@ -34,7 +34,12 @@ export function toJevState(domain: "game" | "ticket", raw: Record<string, unknow
       ),
       waiting: pipe(
         (_, ctx) => (Date.parse(ctx.root.now) - Date.parse(ctx.root.ticket.createdAt)) / HOUR,
-        band({ cuts: [1, 24], labels: ["under an hour", "a few hours", "more than 24 hours"] }),
+        // The policy says strictly more than 24 hours; equality stays in the middle range.
+        (hours) => {
+          if (!Number.isFinite(hours)) return hours;
+          if (hours > 24) return "more than 24 hours";
+          return hours < 1 ? "under an hour" : "1 to 24 hours";
+        },
       ),
       contacts: count({ few: 2, many: 3, labels: { none: "0 times", one: "once", few: "twice", many: "3 or more times" } }),
     },

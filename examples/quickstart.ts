@@ -25,16 +25,23 @@ console.log(state);
 // { hp: "critical", enemies: "a few", lastNoiseAt: "less than a minute ago" }
 
 // 3. Ask Jev as usual. TypeSafeClient reads TYPESAFE_API_KEY from the environment.
-const client = new TypeSafeClient();
-const { answers } = await client.systemOne({
-  state,
-  questions: {
-    action: choice("What should the NPC do next?", {
-      retreat: "Health is critical and enemies are around.",
-      attack: "Health is fine and enemies are around.",
-      patrol: "No enemies are around.",
-    }),
-  },
+async function main() {
+  const client = new TypeSafeClient();
+  const { answers } = await client.systemOne({
+    state,
+    questions: {
+      action: choice("What should the NPC do next?", {
+        retreat: "Health is critical and enemies are around.",
+        attack: "Health is fine and enemies are around.",
+        patrol: "No enemies are around.",
+      }),
+    },
+  });
+  console.log(answers.action.choice, answers.action.confidence);
+  // Example: retreat 1. Live answers and confidence may vary.
+}
+
+main().catch((error) => {
+  console.error(error);
+  process.exitCode = 1;
 });
-console.log(answers.action.choice, answers.action.confidence);
-// retreat 1

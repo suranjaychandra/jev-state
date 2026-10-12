@@ -511,6 +511,7 @@ function renderStates(data) {
 
 function resetDecisions() {
   for (const side of ["raw", "js"]) {
+    $(`${side}-decision`).classList.remove("stale");
     $(`${side}-decision`).innerHTML = `<div class="placeholder">Press <b>&nbsp;ASK JEV&nbsp;</b> to see its decision</div>`;
     $(`${side}-tokens`).textContent = "–";
     $(`${side}-ms`).textContent = "–";
@@ -525,6 +526,7 @@ function markStale() {
 }
 
 function renderDecision(side, ans, expected, options) {
+  const revision = viewRevision;
   const ok = ans.choice === expected;
   const order = [...options].sort((a, b) => (ans.probabilities[b] ?? 0) - (ans.probabilities[a] ?? 0));
   const el = $(`${side}-decision`);
@@ -539,6 +541,7 @@ function renderDecision(side, ans, expected, options) {
       <span class="p">${Math.round((ans.probabilities[o] ?? 0) * 100)}%</span></div>`).join("")}</div>`;
   el.classList.remove("flash"); void el.offsetWidth; el.classList.add("flash");
   requestAnimationFrame(() => {
+    if (revision !== viewRevision) return;
     el.querySelector(".bar > i").style.width = `${ans.confidence * 100}%`;
     el.querySelectorAll(".mini > i").forEach((i) => (i.style.width = `${i.dataset.w}%`));
   });
@@ -556,26 +559,42 @@ function renderScore() {
 // ---------- API ----------
 
 let previewTimer;
+// Invalidate immediately on input changes, before a debounced request starts.
+// Preview and decision requests share a revision so neither can overwrite a newer view.
+let viewRevision = 0;
 function preview() {
   clearTimeout(previewTimer);
+  const revision = ++viewRevision;
+  const body = JSON.stringify({ domain: state.domain, input: state[state.domain] });
+  $("error").style.display = "none";
   markStale();
   previewTimer = setTimeout(async () => {
     try {
-      const r = await fetch("/api/preview", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ domain: state.domain, input: state[state.domain] }) });
-      renderStates(await r.json());
-    } catch {}
+      const r = await fetch("/api/preview", { method: "POST", headers: { "content-type": "application/json" }, body });
+      const data = await r.json();
+      if (revision !== viewRevision) return;
+      if (!r.ok) throw new Error(data.error || "Preview failed");
+      renderStates(data);
+    } catch (err) {
+      if (revision !== viewRevision) return;
+      $("error").textContent = String(err.message || err);
+      $("error").style.display = "block";
+    }
   }, 120);
 }
 
 async function ask() {
   const btn = $("ask");
   if (btn.disabled) return;
+  clearTimeout(previewTimer);
+  const revision = ++viewRevision;
   btn.disabled = true;
   $("ask-label").textContent = "ASKING JEV TWICE";
   $("error").style.display = "none";
   try {
     const r = await fetch("/api/decide", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ domain: state.domain, input: state[state.domain] }) });
     const data = await r.json();
+    if (revision !== viewRevision) return;
     if (!r.ok) throw new Error(data.error || "Request failed");
     renderStates(data);
     renderDecision("raw", data.raw.answer, data.expected, data.options);
@@ -588,6 +607,7 @@ async function ask() {
     session.jsTok += data.jevState.answer.tokens;
     renderScore();
   } catch (err) {
+    if (revision !== viewRevision) return;
     $("error").textContent = String(err.message || err);
     $("error").style.display = "block";
   } finally {

@@ -38,6 +38,21 @@ describe("pick", () => {
     expect(p.resolve({ choice: "orc_chief", confidence: 0.6 }, { minConfidence: 0.6 })).toBe(enemies[2]);
   });
 
+  it("treats missing or non-finite confidence as below the threshold", () => {
+    const p = pick("Which?", enemies, { label: (e) => e.name });
+    // JavaScript callers and external data can supply values outside the TypeScript type.
+    for (const confidence of [undefined, null, "0.9", NaN, Infinity, -Infinity]) {
+      expect(p.resolve({ choice: "orc_chief", confidence: confidence as number }, { minConfidence: 0 })).toBeNull();
+    }
+    expect(p.resolve({ choice: "orc_chief", confidence: 0 }, { minConfidence: 0 })).toBe(enemies[2]);
+    expect(p.resolve({ choice: "orc_chief", confidence: 1 }, { minConfidence: 1 })).toBe(enemies[2]);
+  });
+
+  it("applies minConfidence only to full answers, as in 0.1.1", () => {
+    const p = pick("Which?", enemies, { label: (e) => e.name });
+    expect(p.resolve("orc_chief", { minConfidence: 0.9 })).toBe(enemies[2]);
+  });
+
   it("can leave out the none option or reword it", () => {
     expect(Object.keys(pick("Which?", enemies, { label: (e) => e.name, none: false }).question.criteria)).not.toContain(NONE_ID);
     expect(pick("Which?", enemies, { label: (e) => e.name, none: "Hold fire" }).question.criteria[NONE_ID]).toBe("Hold fire");

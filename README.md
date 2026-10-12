@@ -61,7 +61,7 @@ npm install jev-state @typesafe-ai/sdk
 export TYPESAFE_API_KEY=your-key   # from TypeSafe
 ```
 
-Save this as `quickstart.ts` and run it with `npx tsx quickstart.ts`:
+Save this as `quickstart.ts` and run it with `npx tsx quickstart.ts`. It works in both CommonJS and ESM projects; no `"type": "module"` setting is required.
 
 <!-- example: examples/quickstart.ts -->
 ```ts
@@ -92,19 +92,26 @@ console.log(state);
 // { hp: "critical", enemies: "a few", lastNoiseAt: "less than a minute ago" }
 
 // 3. Ask Jev as usual. TypeSafeClient reads TYPESAFE_API_KEY from the environment.
-const client = new TypeSafeClient();
-const { answers } = await client.systemOne({
-  state,
-  questions: {
-    action: choice("What should the NPC do next?", {
-      retreat: "Health is critical and enemies are around.",
-      attack: "Health is fine and enemies are around.",
-      patrol: "No enemies are around.",
-    }),
-  },
+async function main() {
+  const client = new TypeSafeClient();
+  const { answers } = await client.systemOne({
+    state,
+    questions: {
+      action: choice("What should the NPC do next?", {
+        retreat: "Health is critical and enemies are around.",
+        attack: "Health is fine and enemies are around.",
+        patrol: "No enemies are around.",
+      }),
+    },
+  });
+  console.log(answers.action.choice, answers.action.confidence);
+  // Example: retreat 1. Live answers and confidence may vary.
+}
+
+main().catch((error) => {
+  console.error(error);
+  process.exitCode = 1;
 });
-console.log(answers.action.choice, answers.action.confidence);
-// retreat 1
 ```
 
 `project()` returns plain JSON, so `state` goes straight into `client.systemOne()`.
@@ -193,7 +200,12 @@ const { state } = project(
     ),
     waiting: pipe(
       (_, ctx) => (Date.parse(ctx.root.now) - Date.parse(ctx.root.ticket.createdAt)) / HOUR,
-      band({ cuts: [1, 24], labels: ["under an hour", "a few hours", "more than 24 hours"] }),
+      // The policy says strictly more than 24 hours; equality stays in the middle range.
+      (hours) => {
+        if (!Number.isFinite(hours)) return hours;
+        if (hours > 24) return "more than 24 hours";
+        return hours < 1 ? "under an hour" : "1 to 24 hours";
+      },
     ),
     contacts: count({ few: 2, many: 3, labels: { none: "0 times", one: "once", few: "twice", many: "3 or more times" } }),
   },
@@ -235,7 +247,7 @@ console.log(tool?.name ?? "fallback");
 
 ## Debugging: what changed?
 
-`project()` also returns `meta`, the paths it rewrote and removed. For the quick start above:
+`project()` also returns `meta`, the paths its schema rewrote and removed. For the quick start above:
 
 ```ts
 const { state, meta } = project(raw, schema, { unknown: "drop" });
@@ -243,7 +255,7 @@ console.log(meta.changed); // ["hp", "enemies", "lastNoiseAt"]
 console.log(meta.dropped); // ["maxHp", "debug"]
 ```
 
-If a field you need is in `dropped`, add it to the schema (use `keep()` to pass it through unchanged).
+If a field you need is in `dropped`, add it to the schema (use `keep()` to pass it through unchanged). `meta` is a summary, not a full diff: fields removed inside `prune()` or your own rules aren't listed. See [docs/semantics.md](docs/semantics.md#meta-changed-and-dropped) for the details.
 
 ## Try it: Playground
 
@@ -269,14 +281,17 @@ Your key stays in the local server. See [`playground/README.md`](playground/READ
 Returns `{ state, meta }`. `meta.changed` and `meta.dropped` list the paths that were rewritten or removed.
 
 - A **schema** maps field names to rules. Nest objects to reach nested fields.
-- Rules always see **raw** values, so `hp` can read `maxHp` even if another rule drops `maxHp`.
+- Rules in the **same schema** see that object's original values, so `hp` can read `maxHp` even if a sibling rule drops `maxHp`. Inside `pipe()`, each stage sees the previous stage's output; `ctx.root` is always the original input.
 - A rule keyed on a field the input lacks adds a **derived field**: `{ nearest: (_, ctx) => ... }`.
-- The input is never mutated.
+- The input is never mutated by the built-in rules.
 
 | Option | Default | |
 |---|---|---|
 | `unknown` | `"keep"` | `"drop"` removes every field of the raw input that the schema doesn't name. Schemas inside `each()` and `pipe()` keep unnamed fields; trim those with `prune()`. |
-| `dropEmpty` | `true` | Removes `null`, `""`, `[]`, and `{}` values. |
+| `dropEmpty` | `true` | Removes `null`, `""`, `[]`, and `{}` values. Objects returned by a rule, including `keep()` and `prune()`, are not cleaned inside. |
+| `strict` | `false` | Throws a `TypeError` with the field path if the finished state isn't plain JSON (a `Date`, class instance, `NaN`, `Infinity`, `undefined` in an array, or a cycle). Useful in tests and development. |
+
+More detail on `dropEmpty`, `strict`, and pipelines: [docs/semantics.md](docs/semantics.md).
 
 ## Rules
 
@@ -284,6 +299,8 @@ Returns `{ state, meta }`. `meta.changed` and `meta.dropped` list the paths that
 - `band({ max: 100, labels: ["low", "mid", "high"] })` splits `min`..`max` into equal bands.
 - `band({ max: (ctx) => ctx.parent.maxHp, cuts: [0.2, 0.5], labels })`: with `max`, `cuts` are fractions of the range.
 - `band({ cuts: [10, 30], labels: ["near", "medium", "far"] })`: without `max`, `cuts` are raw values.
+
+Cuts must be finite and strictly ascending, one fewer than labels; with `max` they must be between `0` and `1`. Invalid cuts throw a `RangeError` when you create the rule. A value exactly on a cut gets the higher label.
 
 ### `count({ few?, many?, labels? })`: numbers or arrays to how many
 Returns `none` / `one` / `a few` / `several` / `many`. The defaults are `few: 3` and `many: 10`.
@@ -298,8 +315,38 @@ On arrays it filters, then sorts (without mutating), then caps with `max`, then 
 - `drop()` removes a field.
 - `keep()` passes a field through when `unknown` is `"drop"`.
 - `each()` maps over an array.
-- `pipe()` chains rules.
+- `pipe()` runs left to right, passing each stage's output to the next. Order matters.
 - Any function `(value, ctx) => newValue` is a rule. Return `DROP` to remove the field.
+
+### Reading original data in a pipeline
+
+Each `pipe()` stage sees the previous stage's output. If `prune()` removes `maxHp`, a later stage can't read it from `ctx.parent`. Calculate first, or read the original through `ctx.root`:
+
+<!-- example: examples/composition.ts -->
+```ts
+import { band, pipe, project, prune } from "jev-state";
+
+const raw = { npc: { hp: 20, maxHp: 100 } };
+
+// Calculate before removing fields needed by that calculation.
+const calculateFirst = project(raw, {
+  npc: pipe(
+    { hp: band({ max: (ctx) => ctx.parent.maxHp, labels: ["low", "high"] }) },
+    prune({ keep: ["hp"] }),
+  ),
+}).state;
+
+// If an earlier stage already removed maxHp, read it from the original input.
+const readFromRoot = project(raw, {
+  npc: pipe(
+    prune({ keep: ["hp"] }),
+    { hp: band({ max: (ctx) => ctx.root.npc.maxHp, labels: ["low", "high"] }) },
+  ),
+}).state;
+
+console.log(calculateFirst); // { npc: { hp: "low" } }
+console.log(readFromRoot);   // { npc: { hp: "low" } }
+```
 
 ## `pick(instructions, items, { label, describe?, none? })`
 
@@ -321,10 +368,13 @@ const enemy = target.resolve(answers.target, { minConfidence: 0.6 }); // the ori
 - `pick` adds a `none_of_these` option by default. Reword it with `none: "Hold fire"` or leave it out with `none: false`.
 - Duplicate labels get `_2`, `_3` suffixes.
 - It throws if there are fewer than 2 options or more than Jev's 255.
+- `minConfidence` only works when you pass the full answer (`answers.target`), not just its `choice` string. An answer exactly at the threshold is accepted.
 
 ## Benchmark
 
 `bench/` sends 70 seeded NPC scenarios to the real Jev API twice: once as raw state, once through `jev-state`. The instructions and options are the same both times. Both are graded against the rules Jev was given.
+
+This benchmark uses the seven-action policy in `bench/scenarios.ts`. The interactive demos use different policies; see [which demo rules apply](docs/semantics.md#which-demo-rules-apply) before comparing results across them.
 
 On `jev-1.13.0` (2026-09-29): 420 calls, 0 errors, $0.017 total.
 
@@ -352,6 +402,7 @@ npm run bench           # or: npm run bench -- --per-action 2 --reruns 1
 
 ```sh
 npm install
+npm install --prefix playground  # dependencies for playground tests and typechecking
 npm test          # unit tests, no network
 npm run typecheck
 npm run build
